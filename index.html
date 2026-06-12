@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>フィジカルAIが社会実装される前に解くべき課題</title>
+<meta name="description" content="放置すればフィジカルAI・ロボティクスの社会実装そのものが頓挫する構造的な課題を、技術・制度・体験の3つの視点を横断して抽出・整理した課題地図。">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="stripes"></div>
+<header>
+  <div class="wrap hrow">
+    <a class="site-title" href="index.html">フィジカルAIが社会実装される前に解くべき課題</a>
+    <nav>
+      <a href="index.html">ホーム</a><a href="index.html#all">課題一覧</a><a href="index.html#regulations">規制・制度</a><a href="map.html">課題マップ</a><a href="sources.html">出典・データ</a><a href="index.html#about">このサイトについて</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap hero">
+    <p class="lead">個別のデモ動画や製品発表ではなく、放置すればフィジカルAIの社会実装そのものが頓挫する<br>——いま向き合うべき構造的な課題を、技術・制度・体験の3つの視点を横断して抽出・整理しました。</p>
+    <a class="cta" href="#all">課題一覧を見る →</a>
+    <p class="note">※ 本サイトは構成検証のためのプロトタイプ版です。数値・規制の記述は一次出典での確認前のものを含みます。SNS等での言及やご指摘に応じて、内容を随時更新していきます。</p>
+  </div>
+
+  <div class="wrap sec">
+    <div class="sechead">
+      <h2>9つの社会実装システム</h2>
+    </div>
+    <div class="catgrid">
+    <a class="catbox" href="categories/workforce.html">
+      <h3>労働力・現場・人材<span class="count">4件</span></h3>
+      <p class="catdesc">人手不足、現場への定着、ロボットを扱う人材、現場知の継承に関わる課題。</p>
+      <ul class="issuelist">
+        <li><span class="iname hot">介護現場へのロボット導入の壁</span><span class="mini">緊5・深5</span></li>
+        <li><span class="iname hot">現場知のデータ化</span><span class="mini">緊4・深5</span></li>
+        <li><span class="iname hot">ロボットを扱える人材の不在</span><span class="mini">緊4・深4</span></li>
+        <li><span class="iname">テレオペレーターという新職種</span><span class="mini">緊3・深4</span></li>
+      </ul>
+    </a>
+    <a class="catbox" href="categories/learning-data.html">
+      <h3>学習・データ・モデル<span class="count">4件</span></h3>
+      <p class="catdesc">実機データ、Sim2Real、模倣学習、基盤モデルに関わる課題。</p>
+      <ul class="issuelist">
+        <li><span class="iname hot">実機データの圧倒的不足</span><span class="mini">緊5・深5</span></li>
+        <li><span class="iname hot">基盤モデルの寡占</span><span class="mini">緊4・深5</span></li>
+        <li><span class="iname hot">Sim2Realギャップ</span><span class="mini">緊4・深4</span></li>
+        <li><span class="iname">模倣学習のデータ品質</span><span class="mini">緊3・深4</span></li>
+      </ul>
+    </a>
+    <a class="catbox" href="categories/cost-economics.html">
+      <h3>コスト・経済性・調達<span class="count">4件</span></h3>
+      <p class="catdesc">導入コスト、保守、価格構造、導入モデルに関わる課題。</p>
+      <ul class="issuelist">
+        <li><span class="iname hot">中小企業に届かない価格構造</span><span class="mini">緊4・深5</span></li>
+        <li><span class="iname hot">導入コストとROIの不透明さ</span><span class="mini">緊4・深4</span></li>
+        <li><span class="iname">保守・修理のエコシステム不在</span><span class="mini">緊3・深4</span></li>
+        <li><span class="iname">リース・サブスク等の導入モデル不在</span><span class="mini">緊3・深3</span></li>
+      </ul>
+    </a>
+    <a class="catbox" href="categories/space-infra.html">
+      <h3>環境・空間・インフラ<span class="count">4件</span></h3>
+      <p class="catdesc">建築・都市、通信、充電・動線、公共空間ルールに関わる課題。</p>
+      <ul class="issuelist">
+        <li><span class="iname hot">公道・公共空間の走行ルール</span><span class="mini">緊4・深4</span></li>
+        <li><span class="iname">ロボット前提でない建築・都市</span><span class="mini">緊3・深4</span></li>
+        <li><span class="iname">通信インフラの遅延・帯域</span><span class="mini">緊3・深3</span></li>
+        <li><span class="iname">充電・保管・動線の標準不在</span><span class="mini">緊2・深3</span></li>
+      </ul>
+    </a>
+    <a class="catbox" href="categories/industry-structure.html">
+      <h3>産業構造・SIer・競争力<span class="count">4件</span></h3>
+      <p class="catdesc">動作ポータビリティ、SIer工数、国内産業、タスク定義に関わる課題。</p>
+      <ul class="issuelist">
+        <li><span class="iname hot">動作のポータビリティ不在</span><span class="mini">緊5・深5</span></li>
+        <li><span class="iname hot">SIer工数のボトルネック</span><span class="mini">緊5・深4</span></li>
+        <li><span class="iname hot">タスク定義能力の未成熟</span><span class="mini">緊4・深4</span></li>
+        <li><span class="iname">国内ハード産業の空洞化</span><span class="mini">緊3・深4</span></li>
+      </ul>
+    </a>
+    <a class="catbox" href="categories/safety-reliability.html">
+      <h3>安全・信頼性・事故<span class="count">4件</span></h3>
+      <p class="catdesc">共存安全基準、責任分界、停止設計、経年劣化に関わる課題。</p>
+      <ul class="issuelist">
+        <li><span class="iname hot">人とロボットの共存安全基準</span><span class="mini">緊5・深5</span></li>
+        <li><span class="iname hot">事故時の責任分界</span><span class="mini">緊4・深5</span></li>
+        <li><span class="iname hot">暴走・誤動作の検知と停止設計</span><span class="mini">緊4・深5</span></li>
+        <li><span class="iname">経年劣化・メンテ不足による事故</span><span class="mini">緊3・深4</span></li>
+      </ul>
+    </a>
+    <a class="catbox" href="categories/autonomy-governance.html">
+      <h3>自律性・判断・ガバナンス<span class="count">4件</span></h3>
+      <p class="catdesc">説明可能性、自律レベル、プライバシー、セキュリティに関わる課題。</p>
+      <ul class="issuelist">
+        <li><span class="iname hot">物理を持つAIのセキュリティ</span><span class="mini">緊5・深5</span></li>
+        <li><span class="iname hot">VLM判断の説明可能性</span><span class="mini">緊4・深5</span></li>
+        <li><span class="iname hot">自律レベルの定義不在</span><span class="mini">緊4・深4</span></li>
+        <li><span class="iname hot">遠隔操作とプライバシー</span><span class="mini">緊4・深4</span></li>
+      </ul>
+    </a>
+    <a class="catbox" href="categories/human-ux.html">
+      <h3>人間との関係・UX・受容<span class="count">4件</span></h3>
+      <p class="catdesc">Motion UX、意図の可読性、受容性、信頼の設計に関わる課題。</p>
+      <ul class="issuelist">
+        <li><span class="iname hot">高齢者・非エンジニアの受容性</span><span class="mini">緊4・深5</span></li>
+        <li><span class="iname hot">意図の読み取りやすさ</span><span class="mini">緊4・深4</span></li>
+        <li><span class="iname">動きの不気味さ（Motion Uncanny Valley）</span><span class="mini">緊3・深4</span></li>
+        <li><span class="iname">過信と不信のバランス</span><span class="mini">緊3・深4</span></li>
+      </ul>
+    </a>
+    <a class="catbox" href="categories/standards-global.html">
+      <h3>規格・標準・国際競争<span class="count">4件</span></h3>
+      <p class="catdesc">エコシステム主導権、国際規格、デュアルユース、データ越境に関わる課題。</p>
+      <ul class="issuelist">
+        <li><span class="iname hot">エコシステムの主導権</span><span class="mini">緊4・深4</span></li>
+        <li><span class="iname">安全規格への日本の関与</span><span class="mini">緊3・深4</span></li>
+        <li><span class="iname">デュアルユース規制</span><span class="mini">緊3・深4</span></li>
+        <li><span class="iname">動作データの越境移転</span><span class="mini">緊2・深3</span></li>
+      </ul>
+    </a>
+    </div>
+  </div>
+
+  <div class="wrap sec" id="regulations">
+    <h2>社会実装で論点となる規制・制度</h2>
+    <p class="secdesc" style="margin-top:14px">上記の構造課題の背景で、改正・整備の是非が議論されている主な規制・制度を、分類ごとに公式出典つきで中立に整理した索引です。各項目は関連する課題カードにつないでいます。詳しい論点は課題カード側をご覧ください。</p>
+    <div class="regitem">
+      <div class="regtop"><h3>道路交通法・道路運送車両法（遠隔操作型小型車＝自動配送ロボット）</h3><span class="status">2023年4月施行・運用拡大検討中</span></div>
+      <p>歩道を走行する自動配送ロボットを「遠隔操作型小型車」として届出制で制度化。対象拡大と歩行者優先の実効性、事故時の運用が論点となっている。</p>
+      <div class="regmeta"><span class="lbl">関連課題</span><a href="issues/public-space-operation-rules.html">公道・公共空間の走行ルール</a></div>
+      <div class="regmeta" style="margin-top:6px"><span class="lbl">出典</span>警察庁・国土交通省</div>
+    </div>
+    <div class="regitem">
+      <div class="regtop"><h3>労働安全衛生規則（産業用ロボットの隔離原則と協働運転）</h3><span class="status">2013年特例以降・共存前提への移行が論点</span></div>
+      <p>産業用ロボットを柵で隔離する原則のもと、リスクアセスメント実施を条件に協働運転が可能。柵前提の規定から人と同じ空間で動く前提の基準への移行が論点となっている。</p>
+      <div class="regmeta"><span class="lbl">関連課題</span><a href="issues/human-robot-coexistence-safety.html">人とロボットの共存安全基準</a><a href="issues/aging-fleet-maintenance.html">経年劣化・メンテ不足による事故</a></div>
+      <div class="regmeta" style="margin-top:6px"><span class="lbl">出典</span>厚生労働省</div>
+    </div>
+    <div class="regitem">
+      <div class="regtop"><h3>製造物責任法（自律判断するロボットの「欠陥」）</h3><span class="status">解釈論が継続中</span></div>
+      <p>学習によって挙動が変わるロボットの「欠陥」をどう認定するか、メーカー・AI開発者・運用者の責任分界をどう引くかが論点となっている。</p>
+      <div class="regmeta"><span class="lbl">関連課題</span><a href="issues/liability-demarcation.html">事故時の責任分界</a><a href="issues/maintenance-ecosystem.html">保守・修理のエコシステム不在</a></div>
+      <div class="regmeta" style="margin-top:6px"><span class="lbl">出典</span>消費者庁</div>
+    </div>
+    <div class="regitem">
+      <div class="regtop"><h3>電波法（無線局免許・ローカル5G等の帯域）</h3><span class="status">制度拡充・運用見直しを推進中</span></div>
+      <p>テレオペレーションに必要な低遅延・広帯域通信の確保に関わる周波数割当・免許要件。屋内・地方での運用要件が論点となっている。</p>
+      <div class="regmeta"><span class="lbl">関連課題</span><a href="issues/network-latency-bandwidth.html">通信インフラの遅延・帯域</a><a href="issues/teleoperator-profession.html">テレオペレーターという新職種</a></div>
+      <div class="regmeta" style="margin-top:6px"><span class="lbl">出典</span>総務省</div>
+    </div>
+    <div class="regitem">
+      <div class="regtop"><h3>個人情報保護法（カメラ画像・生活空間データの取扱い）</h3><span class="status">ガイドライン整備が継続中</span></div>
+      <p>遠隔監視・テレオペ・学習データ化はカメラで生活空間を撮影することが前提となる。撮影される側の同意取得とデータ管理の枠組みが論点となっている。</p>
+      <div class="regmeta"><span class="lbl">関連課題</span><a href="issues/teleop-privacy.html">遠隔操作とプライバシー</a><a href="issues/cross-border-motion-data.html">動作データの越境移転</a></div>
+      <div class="regmeta" style="margin-top:6px"><span class="lbl">出典</span>個人情報保護委員会</div>
+    </div>
+    <div class="regitem">
+      <div class="regtop"><h3>外為法（輸出管理・デュアルユース技術）</h3><span class="status">該非判定の運用が論点</span></div>
+      <p>ロボット技術・動作データの軍事転用可能性に対する輸出管理。該非判定の基準と研究公開の線引きが、研究開発の萎縮との均衡で論点となっている。</p>
+      <div class="regmeta"><span class="lbl">関連課題</span><a href="issues/dual-use-regulation.html">デュアルユース規制</a><a href="issues/ecosystem-sovereignty.html">エコシステムの主導権</a></div>
+      <div class="regmeta" style="margin-top:6px"><span class="lbl">出典</span>経済産業省</div>
+    </div>
+  </div>
+
+  <div class="wrap sec" id="all">
+    <div class="sechead">
+      <h2>すべての課題カード</h2>
+    </div>
+    <div class="cardgrid">
+      <a class="card" href="issues/caregiving-robot-adoption.html">
+        <div class="meter">緊急度 <span class="don ">■■■■■</span><span class="doff"></span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■■</span><span class="doff"></span></div>
+        <h3 class="t hot">介護現場へのロボット導入の壁</h3>
+        <p>介護人材不足が深刻化する一方、現場の動線・業務・心理に合うロボットが少なく、導入しても定着しない事例が多い。</p>
+        <div class="chips"><span class="chip">労働力・現場・人材</span><span class="chip">今すぐ</span><span class="chip layer">体験設計で解く</span></div>
+      </a>
+      <a class="card" href="issues/real-robot-data-scarcity.html">
+        <div class="meter">緊急度 <span class="don ">■■■■■</span><span class="doff"></span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■■</span><span class="doff"></span></div>
+        <h3 class="t hot">実機データの圧倒的不足</h3>
+        <p>言語・画像と異なり、ロボット動作データは収集コストが高く量が桁違いに少ない。データ収集の民主化が進まない。</p>
+        <div class="chips"><span class="chip">学習・データ・モデル</span><span class="chip">今すぐ</span><span class="chip layer">技術で解く</span></div>
+      </a>
+      <a class="card" href="issues/motion-portability.html">
+        <div class="meter">緊急度 <span class="don ">■■■■■</span><span class="doff"></span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■■</span><span class="doff"></span></div>
+        <h3 class="t hot">動作のポータビリティ不在</h3>
+        <p>あるメーカーで作った動作が別メーカーで動かず、機種ごとにゼロから作り直し。SIer工数の正体。</p>
+        <div class="chips"><span class="chip">産業構造・SIer・競争力</span><span class="chip">今すぐ</span><span class="chip layer">技術で解く</span></div>
+      </a>
+      <a class="card" href="issues/human-robot-coexistence-safety.html">
+        <div class="meter">緊急度 <span class="don ">■■■■■</span><span class="doff"></span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■■</span><span class="doff"></span></div>
+        <h3 class="t hot">人とロボットの共存安全基準</h3>
+        <p>柵で隔離する前提の安全規格から、同じ空間で動く前提の基準への移行が途上。</p>
+        <div class="chips"><span class="chip">安全・信頼性・事故</span><span class="chip">今すぐ</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/embodied-ai-security.html">
+        <div class="meter">緊急度 <span class="don ">■■■■■</span><span class="doff"></span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■■</span><span class="doff"></span></div>
+        <h3 class="t hot">物理を持つAIのセキュリティ</h3>
+        <p>乗っ取られたロボットは物理的な危害を加えうる。サイバーセキュリティと機能安全の統合が未成熟。</p>
+        <div class="chips"><span class="chip">自律性・判断・ガバナンス</span><span class="chip">今すぐ</span><span class="chip layer">技術で解く</span></div>
+      </a>
+      <a class="card" href="issues/tacit-knowledge-capture.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■■</span><span class="doff"></span></div>
+        <h3 class="t hot">現場知のデータ化</h3>
+        <p>熟練者の暗黙知（手順・力加減・例外対応）がデータとして残らないまま現場から失われている。</p>
+        <div class="chips"><span class="chip">労働力・現場・人材</span><span class="chip">10年以内</span><span class="chip layer">技術で解く</span></div>
+      </a>
+      <a class="card" href="issues/foundation-model-concentration.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■■</span><span class="doff"></span></div>
+        <h3 class="t hot">基盤モデルの寡占</h3>
+        <p>ロボット基盤モデル（VLA等）の開発が一部の海外大手に集中し、出力側で勝負する以外の選択肢が狭まりつつある。</p>
+        <div class="chips"><span class="chip">学習・データ・モデル</span><span class="chip">10年以内</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/price-structure-smb.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■■</span><span class="doff"></span></div>
+        <h3 class="t hot">中小企業に届かない価格構造</h3>
+        <p>産業用は数百万円〜が常識で、人手不足が最も深刻な中小・地方の現場に届かない。安価帯の選択肢が育っていない。</p>
+        <div class="chips"><span class="chip">コスト・経済性・調達</span><span class="chip">5年以内</span><span class="chip layer">技術で解く</span></div>
+      </a>
+      <a class="card" href="issues/liability-demarcation.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■■</span><span class="doff"></span></div>
+        <h3 class="t hot">事故時の責任分界</h3>
+        <p>自律判断するロボットが起こした事故の責任が、メーカー・SIer・運用者・AI開発者の誰にあるか不明確。</p>
+        <div class="chips"><span class="chip">安全・信頼性・事故</span><span class="chip">5年以内</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/failsafe-stop-design.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■■</span><span class="doff"></span></div>
+        <h3 class="t hot">暴走・誤動作の検知と停止設計</h3>
+        <p>異常を検知して安全に止まる設計の標準がなく、各社バラバラ。非常停止の思想が共有されていない。</p>
+        <div class="chips"><span class="chip">安全・信頼性・事故</span><span class="chip">今すぐ</span><span class="chip layer">技術で解く</span></div>
+      </a>
+      <a class="card" href="issues/vlm-explainability.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■■</span><span class="doff"></span></div>
+        <h3 class="t hot">VLM判断の説明可能性</h3>
+        <p>視覚言語モデルがなぜその動作を選んだか説明できず、事故調査・改善・監査が成立しない。</p>
+        <div class="chips"><span class="chip">自律性・判断・ガバナンス</span><span class="chip">5年以内</span><span class="chip layer">技術で解く</span></div>
+      </a>
+      <a class="card" href="issues/accessibility-non-engineers.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■■</span><span class="doff"></span></div>
+        <h3 class="t hot">高齢者・非エンジニアの受容性</h3>
+        <p>操作・意思疎通がエンジニア前提で設計され、最もロボットを必要とする層が使えない。</p>
+        <div class="chips"><span class="chip">人間との関係・UX・受容</span><span class="chip">今すぐ</span><span class="chip layer">体験設計で解く</span></div>
+      </a>
+      <a class="card" href="issues/sier-engineering-bottleneck.html">
+        <div class="meter">緊急度 <span class="don ">■■■■■</span><span class="doff"></span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t hot">SIer工数のボトルネック</h3>
+        <p>現場調査から動作設計までの工数が高止まりし、導入数を増やせない構造的制約になっている。</p>
+        <div class="chips"><span class="chip">産業構造・SIer・競争力</span><span class="chip">今すぐ</span><span class="chip layer">体験設計で解く</span></div>
+      </a>
+      <a class="card" href="issues/robot-literate-workforce.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t hot">ロボットを扱える人材の不在</h3>
+        <p>導入後の調整・教示・トラブル対応を担える人材が現場にいない。エンジニア以外がロボットを扱える入り口が未整備。</p>
+        <div class="chips"><span class="chip">労働力・現場・人材</span><span class="chip">今すぐ</span><span class="chip layer">体験設計で解く</span></div>
+      </a>
+      <a class="card" href="issues/sim2real-gap.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t hot">Sim2Realギャップ</h3>
+        <p>シミュレーションで学習した動作が実機で再現しない。物理特性・摩擦・遅延の差を埋める手法が発展途上。</p>
+        <div class="chips"><span class="chip">学習・データ・モデル</span><span class="chip">5年以内</span><span class="chip layer">技術で解く</span></div>
+      </a>
+      <a class="card" href="issues/roi-opacity.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t hot">導入コストとROIの不透明さ</h3>
+        <p>導入費用に対する効果の測定方法が確立しておらず、中小企業が投資判断できない。</p>
+        <div class="chips"><span class="chip">コスト・経済性・調達</span><span class="chip">今すぐ</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/public-space-operation-rules.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t hot">公道・公共空間の走行ルール</h3>
+        <p>配送ロボット等の公道走行は制度化されたが、歩行者との優先関係・事故時対応など運用の論点が残る。</p>
+        <div class="chips"><span class="chip">環境・空間・インフラ</span><span class="chip">今すぐ</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/task-definition-maturity.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t hot">タスク定義能力の未成熟</h3>
+        <p>「ロボットに何をさせるか」を定義できる現場が少なく、技術があっても適用先が見つからない。</p>
+        <div class="chips"><span class="chip">産業構造・SIer・競争力</span><span class="chip">5年以内</span><span class="chip layer">体験設計で解く</span></div>
+      </a>
+      <a class="card" href="issues/autonomy-level-definition.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t hot">自律レベルの定義不在</h3>
+        <p>自動車のSAEレベルに相当する、ロボット自律性の共通段階定義がなく、規制も保険も設計できない。</p>
+        <div class="chips"><span class="chip">自律性・判断・ガバナンス</span><span class="chip">5年以内</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/teleop-privacy.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t hot">遠隔操作とプライバシー</h3>
+        <p>テレオペ・遠隔監視はカメラで生活空間を映すことが前提で、撮影される側の同意・データ管理の枠組みが弱い。</p>
+        <div class="chips"><span class="chip">自律性・判断・ガバナンス</span><span class="chip">今すぐ</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/intent-legibility.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t hot">意図の読み取りやすさ</h3>
+        <p>ロボットが次に何をするか周囲の人間が予測できず、共存空間でのすれ違い・協働が成立しない。</p>
+        <div class="chips"><span class="chip">人間との関係・UX・受容</span><span class="chip">5年以内</span><span class="chip layer">体験設計で解く</span></div>
+      </a>
+      <a class="card" href="issues/ecosystem-sovereignty.html">
+        <div class="meter">緊急度 <span class="don ">■■■■</span><span class="doff">□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t hot">エコシステムの主導権</h3>
+        <p>ROS・LeRobot等のオープンエコシステムの主導権が海外にあり、日本は利用者側に固定されつつある。</p>
+        <div class="chips"><span class="chip">規格・標準・国際競争</span><span class="chip">10年以内</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/teleoperator-profession.html">
+        <div class="meter">緊急度 <span class="don ">■■■</span><span class="doff">□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t">テレオペレーターという新職種</h3>
+        <p>遠隔操作で実機データを供給する職種が生まれつつあるが、雇用形態・スキル定義・労働環境の枠組みが存在しない。</p>
+        <div class="chips"><span class="chip">労働力・現場・人材</span><span class="chip">5年以内</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/imitation-data-quality.html">
+        <div class="meter">緊急度 <span class="don ">■■■</span><span class="doff">□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t">模倣学習のデータ品質</h3>
+        <p>テレオペで集めたデータの品質基準がなく、失敗データの扱い・アノテーションの標準も未整備。</p>
+        <div class="chips"><span class="chip">学習・データ・モデル</span><span class="chip">5年以内</span><span class="chip layer">技術で解く</span></div>
+      </a>
+      <a class="card" href="issues/maintenance-ecosystem.html">
+        <div class="meter">緊急度 <span class="don ">■■■</span><span class="doff">□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t">保守・修理のエコシステム不在</h3>
+        <p>故障時に直せる事業者が地域におらず、メーカー依存。修理する権利・部品供給の枠組みが未整備。</p>
+        <div class="chips"><span class="chip">コスト・経済性・調達</span><span class="chip">5年以内</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/robot-unready-built-environment.html">
+        <div class="meter">緊急度 <span class="don ">■■■</span><span class="doff">□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t">ロボット前提でない建築・都市</h3>
+        <p>段差・狭通路・重い扉など、人間専用に設計された空間がロボットの稼働範囲を制限している。</p>
+        <div class="chips"><span class="chip">環境・空間・インフラ</span><span class="chip">世代単位</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/domestic-hardware-hollowing.html">
+        <div class="meter">緊急度 <span class="don ">■■■</span><span class="doff">□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t">国内ハード産業の空洞化</h3>
+        <p>安価帯ロボットの開発・製造が海外勢に集中し、国内は産業用高価格帯に偏っている。</p>
+        <div class="chips"><span class="chip">産業構造・SIer・競争力</span><span class="chip">10年以内</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/aging-fleet-maintenance.html">
+        <div class="meter">緊急度 <span class="don ">■■■</span><span class="doff">□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t">経年劣化・メンテ不足による事故</h3>
+        <p>導入後の点検義務が曖昧で、劣化した機体が現場で動き続けるリスクが放置されている。</p>
+        <div class="chips"><span class="chip">安全・信頼性・事故</span><span class="chip">10年以内</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/motion-uncanny-valley.html">
+        <div class="meter">緊急度 <span class="don ">■■■</span><span class="doff">□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t">動きの不気味さ（Motion Uncanny Valley）</h3>
+        <p>人間らしすぎる・速すぎる・意図が読めない動きが不安を生む。動作品質の設計論が確立していない。</p>
+        <div class="chips"><span class="chip">人間との関係・UX・受容</span><span class="chip">5年以内</span><span class="chip layer">体験設計で解く</span></div>
+      </a>
+      <a class="card" href="issues/trust-calibration.html">
+        <div class="meter">緊急度 <span class="don ">■■■</span><span class="doff">□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t">過信と不信のバランス</h3>
+        <p>能力を過信した事故と、不信による不使用の両方が起きる。適切な信頼を設計する方法論がない。</p>
+        <div class="chips"><span class="chip">人間との関係・UX・受容</span><span class="chip">10年以内</span><span class="chip layer">体験設計で解く</span></div>
+      </a>
+      <a class="card" href="issues/safety-standards-participation.html">
+        <div class="meter">緊急度 <span class="don ">■■■</span><span class="doff">□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t">安全規格への日本の関与</h3>
+        <p>ISO等の国際安全規格の策定で日本の発言力が相対的に低下し、国内事情が反映されにくい。</p>
+        <div class="chips"><span class="chip">規格・標準・国際競争</span><span class="chip">10年以内</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/dual-use-regulation.html">
+        <div class="meter">緊急度 <span class="don ">■■■</span><span class="doff">□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></div>
+        <h3 class="t">デュアルユース規制</h3>
+        <p>民生ロボット技術が軍事転用可能なため、輸出管理・研究公開の線引きが研究開発を萎縮させうる。</p>
+        <div class="chips"><span class="chip">規格・標準・国際競争</span><span class="chip">5年以内</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/raas-adoption-models.html">
+        <div class="meter">緊急度 <span class="don ">■■■</span><span class="doff">□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■</span><span class="doff">□□</span></div>
+        <h3 class="t">リース・サブスク等の導入モデル不在</h3>
+        <p>買い切り以外の導入手段（RaaS等）の市場が未成熟で、初期投資の壁を下げる仕組みが広がらない。</p>
+        <div class="chips"><span class="chip">コスト・経済性・調達</span><span class="chip">5年以内</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/network-latency-bandwidth.html">
+        <div class="meter">緊急度 <span class="don ">■■■</span><span class="doff">□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■</span><span class="doff">□□</span></div>
+        <h3 class="t">通信インフラの遅延・帯域</h3>
+        <p>テレオペや遠隔監視に必要な低遅延通信が、地方・屋内で確保できない。</p>
+        <div class="chips"><span class="chip">環境・空間・インフラ</span><span class="chip">5年以内</span><span class="chip layer">技術で解く</span></div>
+      </a>
+      <a class="card" href="issues/charging-docking-standards.html">
+        <div class="meter">緊急度 <span class="don ">■■</span><span class="doff">□□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■</span><span class="doff">□□</span></div>
+        <h3 class="t">充電・保管・動線の標準不在</h3>
+        <p>複数メーカーのロボットが同じ施設で動く際の充電規格・待機場所・優先権のルールがない。</p>
+        <div class="chips"><span class="chip">環境・空間・インフラ</span><span class="chip">10年以内</span><span class="chip layer">制度で解く</span></div>
+      </a>
+      <a class="card" href="issues/cross-border-motion-data.html">
+        <div class="meter">緊急度 <span class="don ">■■</span><span class="doff">□□□</span></div>
+        <div class="meter">深刻度 <span class="don sev">■■■</span><span class="doff">□□</span></div>
+        <h3 class="t">動作データの越境移転</h3>
+        <p>テレオペ・学習データが国境を越えて流通する際のルールがなく、データ主権の論点が未整理。</p>
+        <div class="chips"><span class="chip">規格・標準・国際競争</span><span class="chip">10年以内</span><span class="chip layer">制度で解く</span></div>
+      </a>
+    </div>
+  </div>
+</main>
+<footer id="about">
+  <div class="wrap">
+    <p class="selfdef">事実・解釈・提案を分け、出典と更新履歴を残しながら育てるオープンな課題地図です。</p>
+    <h4>このサイトについて（ディスクレーマー）</h4>
+    <ul>
+      <li><b>生成AIによる制作・評価版です。</b>本文・図・サイトのコードは生成AIが作成し、人手で点検しています。誤りや古い情報を含む可能性があるため、重要な判断は各ページの一次出典に当たってご確認ください。気づいた点や事実誤認のご指摘を歓迎し、内容は随時更新します。</li>
+      <li><b>特定のメーカー・エコシステムの立場はとりません。</b>「人とロボットが共存する社会の持続可能性と体験の質を、長期にわたって維持・向上できるか」を最優先の判断軸として課題を選び、緊急度と深刻度で優先度を示しています。賛否が分かれる論点は結論を断定せず、対立軸と出典を併記します。</li>
+      <li><b>中立を志向しますが、完全な無偏りを保証するものではありません。</b>課題の選び方や表現に偏りが残ることがあります。事実・解釈・提案を分け、トレードオフや反対論も併記するよう努めています。</li>
+    </ul>
+    <p class="flinks"><a href="map.html">課題マップ</a>・<a href="sources.html">出典・データ集</a>・<a href="index.html#about">このサイトについて</a></p>
+  </div>
+</footer>
+</body>
+</html>

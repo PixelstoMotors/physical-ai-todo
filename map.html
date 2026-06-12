@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>課題マップ | フィジカルAIが社会実装される前に解くべき課題</title>
+<meta name="description" content="9分類・36件の課題を、関連でつないだネットワークマップ。点＝課題（大きさ＝緊急度）、線＝関連。">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="stripes"></div>
+<header>
+  <div class="wrap hrow">
+    <a class="site-title" href="index.html">フィジカルAIが社会実装される前に解くべき課題</a>
+    <nav>
+      <a href="index.html">ホーム</a><a href="index.html#all">課題一覧</a><a href="index.html#regulations">規制・制度</a><a href="map.html">課題マップ</a><a href="sources.html">出典・データ</a><a href="index.html#about">このサイトについて</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <h1 class="pagetitle" style="padding-top:40px">課題マップ</h1>
+    <p class="pagedesc">9分類・36件の課題を、緊急度の高い順に並べ、関連する課題でつないでいます。気になる入口から、つながりをたどってください。</p>
+    <p class="mapnote">関連でたどる課題マップ（36課題・111本の関連）。点＝課題（大きさ＝緊急度）、線＝関連。点に触れると関連が強調され、クリックで詳細ページへ。凡例で分類を絞り込めます。</p>
+    <div class="legend">
+      <button class="active" data-cat="all">すべて表示</button>
+      <button data-cat="workforce">労働力・現場・人材</button>
+      <button data-cat="learning-data">学習・データ・モデル</button>
+      <button data-cat="cost-economics">コスト・経済性・調達</button>
+      <button data-cat="space-infra">環境・空間・インフラ</button>
+      <button data-cat="industry-structure">産業構造・SIer・競争力</button>
+      <button data-cat="safety-reliability">安全・信頼性・事故</button>
+      <button data-cat="autonomy-governance">自律性・判断・ガバナンス</button>
+      <button data-cat="human-ux">人間との関係・UX・受容</button>
+      <button data-cat="standards-global">規格・標準・国際競争</button>
+    </div>
+    <div class="mapbox">
+      <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="36課題の関連ネットワーク図">
+        <line class="edge" data-a="1" data-b="2" x1="555" y1="149" x2="481" y2="225"/>
+        <line class="edge" data-a="1" data-b="3" x1="555" y1="149" x2="441" y2="125"/>
+        <line class="edge" data-a="1" data-b="9" x1="555" y1="149" x2="827" y2="408"/>
+        <line class="edge" data-a="1" data-b="18" x1="555" y1="149" x2="509" y2="634"/>
+        <line class="edge" data-a="1" data-b="21" x1="555" y1="149" x2="362" y2="703"/>
+        <line class="edge" data-a="1" data-b="27" x1="555" y1="149" x2="290" y2="510"/>
+        <line class="edge" data-a="1" data-b="29" x1="555" y1="149" x2="144" y2="366"/>
+        <line class="edge" data-a="1" data-b="30" x1="555" y1="149" x2="193" y2="264"/>
+        <line class="edge" data-a="1" data-b="31" x1="555" y1="149" x2="269" y2="351"/>
+        <line class="edge" data-a="2" data-b="3" x1="481" y1="225" x2="441" y2="125"/>
+        <line class="edge" data-a="2" data-b="4" x1="481" y1="225" x2="520" y2="45"/>
+        <line class="edge" data-a="2" data-b="18" x1="481" y1="225" x2="509" y2="634"/>
+        <line class="edge" data-a="2" data-b="20" x1="481" y1="225" x2="689" y2="678"/>
+        <line class="edge" data-a="2" data-b="31" x1="481" y1="225" x2="269" y2="351"/>
+        <line class="edge" data-a="3" data-b="5" x1="441" y1="125" x2="744" y2="236"/>
+        <line class="edge" data-a="3" data-b="7" x1="441" y1="125" x2="647" y2="168"/>
+        <line class="edge" data-a="3" data-b="14" x1="441" y1="125" x2="672" y2="553"/>
+        <line class="edge" data-a="3" data-b="27" x1="441" y1="125" x2="290" y2="510"/>
+        <line class="edge" data-a="3" data-b="36" x1="441" y1="125" x2="281" y2="291"/>
+        <line class="edge" data-a="4" data-b="5" x1="520" y1="45" x2="744" y2="236"/>
+        <line class="edge" data-a="4" data-b="7" x1="520" y1="45" x2="647" y2="168"/>
+        <line class="edge" data-a="4" data-b="17" x1="520" y1="45" x2="588" y2="717"/>
+        <line class="edge" data-a="4" data-b="20" x1="520" y1="45" x2="689" y2="678"/>
+        <line class="edge" data-a="5" data-b="6" x1="744" y1="236" x2="637" y2="279"/>
+        <line class="edge" data-a="5" data-b="7" x1="744" y1="236" x2="647" y2="168"/>
+        <line class="edge" data-a="5" data-b="8" x1="744" y1="236" x2="744" y2="126"/>
+        <line class="edge" data-a="5" data-b="11" x1="744" y1="236" x2="762" y2="305"/>
+        <line class="edge" data-a="5" data-b="17" x1="744" y1="236" x2="588" y2="717"/>
+        <line class="edge" data-a="5" data-b="33" x1="744" y1="236" x2="252" y2="184"/>
+        <line class="edge" data-a="6" data-b="7" x1="637" y1="279" x2="647" y2="168"/>
+        <line class="edge" data-a="6" data-b="23" x1="637" y1="279" x2="435" y2="607"/>
+        <line class="edge" data-a="6" data-b="25" x1="637" y1="279" x2="184" y2="572"/>
+        <line class="edge" data-a="7" data-b="25" x1="647" y1="168" x2="184" y2="572"/>
+        <line class="edge" data-a="8" data-b="19" x1="744" y1="126" x2="619" y2="593"/>
+        <line class="edge" data-a="8" data-b="25" x1="744" y1="126" x2="184" y2="572"/>
+        <line class="edge" data-a="8" data-b="28" x1="744" y1="126" x2="286" y2="619"/>
+        <line class="edge" data-a="8" data-b="33" x1="744" y1="126" x2="252" y2="184"/>
+        <line class="edge" data-a="8" data-b="35" x1="744" y1="126" x2="366" y2="217"/>
+        <line class="edge" data-a="8" data-b="36" x1="744" y1="126" x2="281" y2="291"/>
+        <line class="edge" data-a="9" data-b="11" x1="827" y1="408" x2="762" y2="305"/>
+        <line class="edge" data-a="9" data-b="12" x1="827" y1="408" x2="878" y2="307"/>
+        <line class="edge" data-a="9" data-b="18" x1="827" y1="408" x2="509" y2="634"/>
+        <line class="edge" data-a="9" data-b="20" x1="827" y1="408" x2="689" y2="678"/>
+        <line class="edge" data-a="10" data-b="11" x1="717" y1="408" x2="762" y2="305"/>
+        <line class="edge" data-a="10" data-b="12" x1="717" y1="408" x2="878" y2="307"/>
+        <line class="edge" data-a="10" data-b="19" x1="717" y1="408" x2="619" y2="593"/>
+        <line class="edge" data-a="10" data-b="22" x1="717" y1="408" x2="324" y2="601"/>
+        <line class="edge" data-a="10" data-b="24" x1="717" y1="408" x2="474" y2="715"/>
+        <line class="edge" data-a="11" data-b="12" x1="762" y1="305" x2="878" y2="307"/>
+        <line class="edge" data-a="11" data-b="18" x1="762" y1="305" x2="509" y2="634"/>
+        <line class="edge" data-a="11" data-b="19" x1="762" y1="305" x2="619" y2="593"/>
+        <line class="edge" data-a="12" data-b="24" x1="878" y1="307" x2="474" y2="715"/>
+        <line class="edge" data-a="13" data-b="14" x1="770" y1="604" x2="672" y2="553"/>
+        <line class="edge" data-a="13" data-b="15" x1="770" y1="604" x2="751" y2="481"/>
+        <line class="edge" data-a="13" data-b="16" x1="770" y1="604" x2="852" y2="524"/>
+        <line class="edge" data-a="13" data-b="30" x1="770" y1="604" x2="193" y2="264"/>
+        <line class="edge" data-a="14" data-b="16" x1="672" y1="553" x2="852" y2="524"/>
+        <line class="edge" data-a="14" data-b="28" x1="672" y1="553" x2="286" y2="619"/>
+        <line class="edge" data-a="14" data-b="36" x1="672" y1="553" x2="281" y2="291"/>
+        <line class="edge" data-a="15" data-b="16" x1="751" y1="481" x2="852" y2="524"/>
+        <line class="edge" data-a="15" data-b="33" x1="751" y1="481" x2="252" y2="184"/>
+        <line class="edge" data-a="15" data-b="34" x1="751" y1="481" x2="332" y2="112"/>
+        <line class="edge" data-a="16" data-b="21" x1="852" y1="524" x2="362" y2="703"/>
+        <line class="edge" data-a="16" data-b="22" x1="852" y1="524" x2="324" y2="601"/>
+        <line class="edge" data-a="16" data-b="26" x1="852" y1="524" x2="196" y2="463"/>
+        <line class="edge" data-a="16" data-b="27" x1="852" y1="524" x2="290" y2="510"/>
+        <line class="edge" data-a="16" data-b="30" x1="852" y1="524" x2="193" y2="264"/>
+        <line class="edge" data-a="17" data-b="18" x1="588" y1="717" x2="509" y2="634"/>
+        <line class="edge" data-a="17" data-b="19" x1="588" y1="717" x2="619" y2="593"/>
+        <line class="edge" data-a="17" data-b="20" x1="588" y1="717" x2="689" y2="678"/>
+        <line class="edge" data-a="17" data-b="21" x1="588" y1="717" x2="362" y2="703"/>
+        <line class="edge" data-a="17" data-b="33" x1="588" y1="717" x2="252" y2="184"/>
+        <line class="edge" data-a="17" data-b="34" x1="588" y1="717" x2="332" y2="112"/>
+        <line class="edge" data-a="18" data-b="20" x1="509" y1="634" x2="689" y2="678"/>
+        <line class="edge" data-a="19" data-b="33" x1="619" y1="593" x2="252" y2="184"/>
+        <line class="edge" data-a="19" data-b="34" x1="619" y1="593" x2="332" y2="112"/>
+        <line class="edge" data-a="19" data-b="35" x1="619" y1="593" x2="366" y2="217"/>
+        <line class="edge" data-a="20" data-b="31" x1="689" y1="678" x2="269" y2="351"/>
+        <line class="edge" data-a="21" data-b="22" x1="362" y1="703" x2="324" y2="601"/>
+        <line class="edge" data-a="21" data-b="23" x1="362" y1="703" x2="435" y2="607"/>
+        <line class="edge" data-a="21" data-b="24" x1="362" y1="703" x2="474" y2="715"/>
+        <line class="edge" data-a="21" data-b="26" x1="362" y1="703" x2="196" y2="463"/>
+        <line class="edge" data-a="21" data-b="29" x1="362" y1="703" x2="144" y2="366"/>
+        <line class="edge" data-a="21" data-b="30" x1="362" y1="703" x2="193" y2="264"/>
+        <line class="edge" data-a="21" data-b="34" x1="362" y1="703" x2="332" y2="112"/>
+        <line class="edge" data-a="22" data-b="23" x1="324" y1="601" x2="435" y2="607"/>
+        <line class="edge" data-a="22" data-b="24" x1="324" y1="601" x2="474" y2="715"/>
+        <line class="edge" data-a="22" data-b="25" x1="324" y1="601" x2="184" y2="572"/>
+        <line class="edge" data-a="22" data-b="26" x1="324" y1="601" x2="196" y2="463"/>
+        <line class="edge" data-a="22" data-b="32" x1="324" y1="601" x2="215" y2="446"/>
+        <line class="edge" data-a="23" data-b="24" x1="435" y1="607" x2="474" y2="715"/>
+        <line class="edge" data-a="23" data-b="26" x1="435" y1="607" x2="196" y2="463"/>
+        <line class="edge" data-a="23" data-b="28" x1="435" y1="607" x2="286" y2="619"/>
+        <line class="edge" data-a="25" data-b="26" x1="184" y1="572" x2="196" y2="463"/>
+        <line class="edge" data-a="25" data-b="28" x1="184" y1="572" x2="286" y2="619"/>
+        <line class="edge" data-a="25" data-b="32" x1="184" y1="572" x2="215" y2="446"/>
+        <line class="edge" data-a="26" data-b="34" x1="196" y1="463" x2="332" y2="112"/>
+        <line class="edge" data-a="27" data-b="28" x1="290" y1="510" x2="286" y2="619"/>
+        <line class="edge" data-a="27" data-b="31" x1="290" y1="510" x2="269" y2="351"/>
+        <line class="edge" data-a="27" data-b="36" x1="290" y1="510" x2="281" y2="291"/>
+        <line class="edge" data-a="28" data-b="35" x1="286" y1="619" x2="366" y2="217"/>
+        <line class="edge" data-a="29" data-b="30" x1="144" y1="366" x2="193" y2="264"/>
+        <line class="edge" data-a="29" data-b="31" x1="144" y1="366" x2="269" y2="351"/>
+        <line class="edge" data-a="29" data-b="32" x1="144" y1="366" x2="215" y2="446"/>
+        <line class="edge" data-a="30" data-b="31" x1="193" y1="264" x2="269" y2="351"/>
+        <line class="edge" data-a="30" data-b="32" x1="193" y1="264" x2="215" y2="446"/>
+        <line class="edge" data-a="31" data-b="32" x1="269" y1="351" x2="215" y2="446"/>
+        <line class="edge" data-a="33" data-b="34" x1="252" y1="184" x2="332" y2="112"/>
+        <line class="edge" data-a="33" data-b="35" x1="252" y1="184" x2="366" y2="217"/>
+        <line class="edge" data-a="33" data-b="36" x1="252" y1="184" x2="281" y2="291"/>
+        <line class="edge" data-a="35" data-b="36" x1="366" y1="217" x2="281" y2="291"/>
+        <g class="node" data-id="1" data-cat="workforce" data-slug="caregiving-robot-adoption" data-title="介護現場へのロボット導入の壁" data-catname="労働力・現場・人材" data-urg="5" data-sev="5"><rect x="539" y="133" width="31" height="31"/></g>
+        <g class="node" data-id="2" data-cat="workforce" data-slug="robot-literate-workforce" data-title="ロボットを扱える人材の不在" data-catname="労働力・現場・人材" data-urg="4" data-sev="4"><rect x="468" y="211" width="27" height="27"/></g>
+        <g class="node" data-id="3" data-cat="workforce" data-slug="teleoperator-profession" data-title="テレオペレーターという新職種" data-catname="労働力・現場・人材" data-urg="3" data-sev="4"><rect x="429" y="113" width="24" height="24"/></g>
+        <g class="node" data-id="4" data-cat="workforce" data-slug="tacit-knowledge-capture" data-title="現場知のデータ化" data-catname="労働力・現場・人材" data-urg="4" data-sev="5"><rect x="506" y="31" width="27" height="27"/></g>
+        <g class="node" data-id="5" data-cat="learning-data" data-slug="real-robot-data-scarcity" data-title="実機データの圧倒的不足" data-catname="学習・データ・モデル" data-urg="5" data-sev="5"><rect x="729" y="220" width="31" height="31"/></g>
+        <g class="node" data-id="6" data-cat="learning-data" data-slug="sim2real-gap" data-title="Sim2Realギャップ" data-catname="学習・データ・モデル" data-urg="4" data-sev="4"><rect x="623" y="265" width="27" height="27"/></g>
+        <g class="node" data-id="7" data-cat="learning-data" data-slug="imitation-data-quality" data-title="模倣学習のデータ品質" data-catname="学習・データ・モデル" data-urg="3" data-sev="4"><rect x="635" y="156" width="24" height="24"/></g>
+        <g class="node" data-id="8" data-cat="learning-data" data-slug="foundation-model-concentration" data-title="基盤モデルの寡占" data-catname="学習・データ・モデル" data-urg="4" data-sev="5"><rect x="731" y="112" width="27" height="27"/></g>
+        <g class="node" data-id="9" data-cat="cost-economics" data-slug="roi-opacity" data-title="導入コストとROIの不透明さ" data-catname="コスト・経済性・調達" data-urg="4" data-sev="4"><rect x="813" y="395" width="27" height="27"/></g>
+        <g class="node" data-id="10" data-cat="cost-economics" data-slug="maintenance-ecosystem" data-title="保守・修理のエコシステム不在" data-catname="コスト・経済性・調達" data-urg="3" data-sev="4"><rect x="705" y="396" width="24" height="24"/></g>
+        <g class="node" data-id="11" data-cat="cost-economics" data-slug="price-structure-smb" data-title="中小企業に届かない価格構造" data-catname="コスト・経済性・調達" data-urg="4" data-sev="5"><rect x="748" y="291" width="27" height="27"/></g>
+        <g class="node" data-id="12" data-cat="cost-economics" data-slug="raas-adoption-models" data-title="リース・サブスク等の導入モデル不在" data-catname="コスト・経済性・調達" data-urg="3" data-sev="3"><rect x="866" y="295" width="24" height="24"/></g>
+        <g class="node" data-id="13" data-cat="space-infra" data-slug="robot-unready-built-environment" data-title="ロボット前提でない建築・都市" data-catname="環境・空間・インフラ" data-urg="3" data-sev="4"><rect x="758" y="592" width="24" height="24"/></g>
+        <g class="node" data-id="14" data-cat="space-infra" data-slug="network-latency-bandwidth" data-title="通信インフラの遅延・帯域" data-catname="環境・空間・インフラ" data-urg="3" data-sev="3"><rect x="660" y="541" width="24" height="24"/></g>
+        <g class="node" data-id="15" data-cat="space-infra" data-slug="charging-docking-standards" data-title="充電・保管・動線の標準不在" data-catname="環境・空間・インフラ" data-urg="2" data-sev="3"><rect x="740" y="471" width="20" height="20"/></g>
+        <g class="node" data-id="16" data-cat="space-infra" data-slug="public-space-operation-rules" data-title="公道・公共空間の走行ルール" data-catname="環境・空間・インフラ" data-urg="4" data-sev="4"><rect x="838" y="511" width="27" height="27"/></g>
+        <g class="node" data-id="17" data-cat="industry-structure" data-slug="motion-portability" data-title="動作のポータビリティ不在" data-catname="産業構造・SIer・競争力" data-urg="5" data-sev="5"><rect x="572" y="701" width="31" height="31"/></g>
+        <g class="node" data-id="18" data-cat="industry-structure" data-slug="sier-engineering-bottleneck" data-title="SIer工数のボトルネック" data-catname="産業構造・SIer・競争力" data-urg="5" data-sev="4"><rect x="494" y="618" width="31" height="31"/></g>
+        <g class="node" data-id="19" data-cat="industry-structure" data-slug="domestic-hardware-hollowing" data-title="国内ハード産業の空洞化" data-catname="産業構造・SIer・競争力" data-urg="3" data-sev="4"><rect x="607" y="581" width="24" height="24"/></g>
+        <g class="node" data-id="20" data-cat="industry-structure" data-slug="task-definition-maturity" data-title="タスク定義能力の未成熟" data-catname="産業構造・SIer・競争力" data-urg="4" data-sev="4"><rect x="675" y="665" width="27" height="27"/></g>
+        <g class="node" data-id="21" data-cat="safety-reliability" data-slug="human-robot-coexistence-safety" data-title="人とロボットの共存安全基準" data-catname="安全・信頼性・事故" data-urg="5" data-sev="5"><rect x="347" y="688" width="31" height="31"/></g>
+        <g class="node" data-id="22" data-cat="safety-reliability" data-slug="liability-demarcation" data-title="事故時の責任分界" data-catname="安全・信頼性・事故" data-urg="4" data-sev="5"><rect x="310" y="588" width="27" height="27"/></g>
+        <g class="node" data-id="23" data-cat="safety-reliability" data-slug="failsafe-stop-design" data-title="暴走・誤動作の検知と停止設計" data-catname="安全・信頼性・事故" data-urg="4" data-sev="5"><rect x="421" y="594" width="27" height="27"/></g>
+        <g class="node" data-id="24" data-cat="safety-reliability" data-slug="aging-fleet-maintenance" data-title="経年劣化・メンテ不足による事故" data-catname="安全・信頼性・事故" data-urg="3" data-sev="4"><rect x="462" y="703" width="24" height="24"/></g>
+        <g class="node" data-id="25" data-cat="autonomy-governance" data-slug="vlm-explainability" data-title="VLM判断の説明可能性" data-catname="自律性・判断・ガバナンス" data-urg="4" data-sev="5"><rect x="170" y="558" width="27" height="27"/></g>
+        <g class="node" data-id="26" data-cat="autonomy-governance" data-slug="autonomy-level-definition" data-title="自律レベルの定義不在" data-catname="自律性・判断・ガバナンス" data-urg="4" data-sev="4"><rect x="182" y="449" width="27" height="27"/></g>
+        <g class="node" data-id="27" data-cat="autonomy-governance" data-slug="teleop-privacy" data-title="遠隔操作とプライバシー" data-catname="自律性・判断・ガバナンス" data-urg="4" data-sev="4"><rect x="277" y="496" width="27" height="27"/></g>
+        <g class="node" data-id="28" data-cat="autonomy-governance" data-slug="embodied-ai-security" data-title="物理を持つAIのセキュリティ" data-catname="自律性・判断・ガバナンス" data-urg="5" data-sev="5"><rect x="271" y="603" width="31" height="31"/></g>
+        <g class="node" data-id="29" data-cat="human-ux" data-slug="motion-uncanny-valley" data-title="動きの不気味さ（Motion Uncanny Valley）" data-catname="人間との関係・UX・受容" data-urg="3" data-sev="4"><rect x="132" y="354" width="24" height="24"/></g>
+        <g class="node" data-id="30" data-cat="human-ux" data-slug="intent-legibility" data-title="意図の読み取りやすさ" data-catname="人間との関係・UX・受容" data-urg="4" data-sev="4"><rect x="179" y="250" width="27" height="27"/></g>
+        <g class="node" data-id="31" data-cat="human-ux" data-slug="accessibility-non-engineers" data-title="高齢者・非エンジニアの受容性" data-catname="人間との関係・UX・受容" data-urg="4" data-sev="5"><rect x="255" y="337" width="27" height="27"/></g>
+        <g class="node" data-id="32" data-cat="human-ux" data-slug="trust-calibration" data-title="過信と不信のバランス" data-catname="人間との関係・UX・受容" data-urg="3" data-sev="4"><rect x="203" y="434" width="24" height="24"/></g>
+        <g class="node" data-id="33" data-cat="standards-global" data-slug="ecosystem-sovereignty" data-title="エコシステムの主導権" data-catname="規格・標準・国際競争" data-urg="4" data-sev="4"><rect x="239" y="170" width="27" height="27"/></g>
+        <g class="node" data-id="34" data-cat="standards-global" data-slug="safety-standards-participation" data-title="安全規格への日本の関与" data-catname="規格・標準・国際競争" data-urg="3" data-sev="4"><rect x="320" y="100" width="24" height="24"/></g>
+        <g class="node" data-id="35" data-cat="standards-global" data-slug="dual-use-regulation" data-title="デュアルユース規制" data-catname="規格・標準・国際競争" data-urg="3" data-sev="4"><rect x="354" y="205" width="24" height="24"/></g>
+        <g class="node" data-id="36" data-cat="standards-global" data-slug="cross-border-motion-data" data-title="動作データの越境移転" data-catname="規格・標準・国際競争" data-urg="2" data-sev="3"><rect x="271" y="281" width="20" height="20"/></g>
+      </svg>
+      <div class="tip" id="tip"></div>
+    </div>
+  </div>
+  <div class="wrap sec">
+    <h2 class="maplist-h">労働力・現場・人材<span class="orgcount">4</span></h2>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/caregiving-robot-adoption.html">介護現場へのロボット導入の壁</a><span class="mini">緊5・深5</span></div>
+      <div class="relchips"><a class="chip" href="issues/robot-literate-workforce.html">ロボットを扱える人材の不在</a><a class="chip" href="issues/teleoperator-profession.html">テレオペレーターという新職種</a><a class="chip" href="issues/roi-opacity.html">導入コストとROIの不透明さ</a><a class="chip" href="issues/sier-engineering-bottleneck.html">SIer工数のボトルネック</a><a class="chip" href="issues/human-robot-coexistence-safety.html">人とロボットの共存安全基準</a><a class="chip" href="issues/teleop-privacy.html">遠隔操作とプライバシー</a><a class="chip" href="issues/intent-legibility.html">意図の読み取りやすさ</a><a class="chip" href="issues/accessibility-non-engineers.html">高齢者・非エンジニアの受容性</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/tacit-knowledge-capture.html">現場知のデータ化</a><span class="mini">緊4・深5</span></div>
+      <div class="relchips"><a class="chip" href="issues/robot-literate-workforce.html">ロボットを扱える人材の不在</a><a class="chip" href="issues/real-robot-data-scarcity.html">実機データの圧倒的不足</a><a class="chip" href="issues/imitation-data-quality.html">模倣学習のデータ品質</a><a class="chip" href="issues/motion-portability.html">動作のポータビリティ不在</a><a class="chip" href="issues/task-definition-maturity.html">タスク定義能力の未成熟</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/robot-literate-workforce.html">ロボットを扱える人材の不在</a><span class="mini">緊4・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/caregiving-robot-adoption.html">介護現場へのロボット導入の壁</a><a class="chip" href="issues/teleoperator-profession.html">テレオペレーターという新職種</a><a class="chip" href="issues/sier-engineering-bottleneck.html">SIer工数のボトルネック</a><a class="chip" href="issues/task-definition-maturity.html">タスク定義能力の未成熟</a><a class="chip" href="issues/accessibility-non-engineers.html">高齢者・非エンジニアの受容性</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/teleoperator-profession.html">テレオペレーターという新職種</a><span class="mini">緊3・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/robot-literate-workforce.html">ロボットを扱える人材の不在</a><a class="chip" href="issues/real-robot-data-scarcity.html">実機データの圧倒的不足</a><a class="chip" href="issues/imitation-data-quality.html">模倣学習のデータ品質</a><a class="chip" href="issues/network-latency-bandwidth.html">通信インフラの遅延・帯域</a><a class="chip" href="issues/teleop-privacy.html">遠隔操作とプライバシー</a><a class="chip" href="issues/cross-border-motion-data.html">動作データの越境移転</a></div>
+    </div>
+    <h2 class="maplist-h">学習・データ・モデル<span class="orgcount">4</span></h2>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/real-robot-data-scarcity.html">実機データの圧倒的不足</a><span class="mini">緊5・深5</span></div>
+      <div class="relchips"><a class="chip" href="issues/teleoperator-profession.html">テレオペレーターという新職種</a><a class="chip" href="issues/tacit-knowledge-capture.html">現場知のデータ化</a><a class="chip" href="issues/sim2real-gap.html">Sim2Realギャップ</a><a class="chip" href="issues/imitation-data-quality.html">模倣学習のデータ品質</a><a class="chip" href="issues/foundation-model-concentration.html">基盤モデルの寡占</a><a class="chip" href="issues/price-structure-smb.html">中小企業に届かない価格構造</a><a class="chip" href="issues/ecosystem-sovereignty.html">エコシステムの主導権</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/foundation-model-concentration.html">基盤モデルの寡占</a><span class="mini">緊4・深5</span></div>
+      <div class="relchips"><a class="chip" href="issues/real-robot-data-scarcity.html">実機データの圧倒的不足</a><a class="chip" href="issues/domestic-hardware-hollowing.html">国内ハード産業の空洞化</a><a class="chip" href="issues/vlm-explainability.html">VLM判断の説明可能性</a><a class="chip" href="issues/embodied-ai-security.html">物理を持つAIのセキュリティ</a><a class="chip" href="issues/ecosystem-sovereignty.html">エコシステムの主導権</a><a class="chip" href="issues/cross-border-motion-data.html">動作データの越境移転</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/sim2real-gap.html">Sim2Realギャップ</a><span class="mini">緊4・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/real-robot-data-scarcity.html">実機データの圧倒的不足</a><a class="chip" href="issues/imitation-data-quality.html">模倣学習のデータ品質</a><a class="chip" href="issues/failsafe-stop-design.html">暴走・誤動作の検知と停止設計</a><a class="chip" href="issues/vlm-explainability.html">VLM判断の説明可能性</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/imitation-data-quality.html">模倣学習のデータ品質</a><span class="mini">緊3・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/teleoperator-profession.html">テレオペレーターという新職種</a><a class="chip" href="issues/tacit-knowledge-capture.html">現場知のデータ化</a><a class="chip" href="issues/real-robot-data-scarcity.html">実機データの圧倒的不足</a><a class="chip" href="issues/sim2real-gap.html">Sim2Realギャップ</a><a class="chip" href="issues/vlm-explainability.html">VLM判断の説明可能性</a></div>
+    </div>
+    <h2 class="maplist-h">コスト・経済性・調達<span class="orgcount">4</span></h2>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/price-structure-smb.html">中小企業に届かない価格構造</a><span class="mini">緊4・深5</span></div>
+      <div class="relchips"><a class="chip" href="issues/real-robot-data-scarcity.html">実機データの圧倒的不足</a><a class="chip" href="issues/roi-opacity.html">導入コストとROIの不透明さ</a><a class="chip" href="issues/maintenance-ecosystem.html">保守・修理のエコシステム不在</a><a class="chip" href="issues/raas-adoption-models.html">リース・サブスク等の導入モデル不在</a><a class="chip" href="issues/sier-engineering-bottleneck.html">SIer工数のボトルネック</a><a class="chip" href="issues/domestic-hardware-hollowing.html">国内ハード産業の空洞化</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/roi-opacity.html">導入コストとROIの不透明さ</a><span class="mini">緊4・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/caregiving-robot-adoption.html">介護現場へのロボット導入の壁</a><a class="chip" href="issues/price-structure-smb.html">中小企業に届かない価格構造</a><a class="chip" href="issues/raas-adoption-models.html">リース・サブスク等の導入モデル不在</a><a class="chip" href="issues/sier-engineering-bottleneck.html">SIer工数のボトルネック</a><a class="chip" href="issues/task-definition-maturity.html">タスク定義能力の未成熟</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/maintenance-ecosystem.html">保守・修理のエコシステム不在</a><span class="mini">緊3・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/price-structure-smb.html">中小企業に届かない価格構造</a><a class="chip" href="issues/raas-adoption-models.html">リース・サブスク等の導入モデル不在</a><a class="chip" href="issues/domestic-hardware-hollowing.html">国内ハード産業の空洞化</a><a class="chip" href="issues/liability-demarcation.html">事故時の責任分界</a><a class="chip" href="issues/aging-fleet-maintenance.html">経年劣化・メンテ不足による事故</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/raas-adoption-models.html">リース・サブスク等の導入モデル不在</a><span class="mini">緊3・深3</span></div>
+      <div class="relchips"><a class="chip" href="issues/roi-opacity.html">導入コストとROIの不透明さ</a><a class="chip" href="issues/maintenance-ecosystem.html">保守・修理のエコシステム不在</a><a class="chip" href="issues/price-structure-smb.html">中小企業に届かない価格構造</a><a class="chip" href="issues/aging-fleet-maintenance.html">経年劣化・メンテ不足による事故</a></div>
+    </div>
+    <h2 class="maplist-h">環境・空間・インフラ<span class="orgcount">4</span></h2>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/public-space-operation-rules.html">公道・公共空間の走行ルール</a><span class="mini">緊4・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/robot-unready-built-environment.html">ロボット前提でない建築・都市</a><a class="chip" href="issues/network-latency-bandwidth.html">通信インフラの遅延・帯域</a><a class="chip" href="issues/charging-docking-standards.html">充電・保管・動線の標準不在</a><a class="chip" href="issues/human-robot-coexistence-safety.html">人とロボットの共存安全基準</a><a class="chip" href="issues/liability-demarcation.html">事故時の責任分界</a><a class="chip" href="issues/teleop-privacy.html">遠隔操作とプライバシー</a><a class="chip" href="issues/intent-legibility.html">意図の読み取りやすさ</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/robot-unready-built-environment.html">ロボット前提でない建築・都市</a><span class="mini">緊3・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/network-latency-bandwidth.html">通信インフラの遅延・帯域</a><a class="chip" href="issues/charging-docking-standards.html">充電・保管・動線の標準不在</a><a class="chip" href="issues/public-space-operation-rules.html">公道・公共空間の走行ルール</a><a class="chip" href="issues/intent-legibility.html">意図の読み取りやすさ</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/network-latency-bandwidth.html">通信インフラの遅延・帯域</a><span class="mini">緊3・深3</span></div>
+      <div class="relchips"><a class="chip" href="issues/teleoperator-profession.html">テレオペレーターという新職種</a><a class="chip" href="issues/robot-unready-built-environment.html">ロボット前提でない建築・都市</a><a class="chip" href="issues/public-space-operation-rules.html">公道・公共空間の走行ルール</a><a class="chip" href="issues/embodied-ai-security.html">物理を持つAIのセキュリティ</a><a class="chip" href="issues/cross-border-motion-data.html">動作データの越境移転</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/charging-docking-standards.html">充電・保管・動線の標準不在</a><span class="mini">緊2・深3</span></div>
+      <div class="relchips"><a class="chip" href="issues/robot-unready-built-environment.html">ロボット前提でない建築・都市</a><a class="chip" href="issues/public-space-operation-rules.html">公道・公共空間の走行ルール</a><a class="chip" href="issues/ecosystem-sovereignty.html">エコシステムの主導権</a><a class="chip" href="issues/safety-standards-participation.html">安全規格への日本の関与</a></div>
+    </div>
+    <h2 class="maplist-h">産業構造・SIer・競争力<span class="orgcount">4</span></h2>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/motion-portability.html">動作のポータビリティ不在</a><span class="mini">緊5・深5</span></div>
+      <div class="relchips"><a class="chip" href="issues/tacit-knowledge-capture.html">現場知のデータ化</a><a class="chip" href="issues/real-robot-data-scarcity.html">実機データの圧倒的不足</a><a class="chip" href="issues/sier-engineering-bottleneck.html">SIer工数のボトルネック</a><a class="chip" href="issues/domestic-hardware-hollowing.html">国内ハード産業の空洞化</a><a class="chip" href="issues/task-definition-maturity.html">タスク定義能力の未成熟</a><a class="chip" href="issues/human-robot-coexistence-safety.html">人とロボットの共存安全基準</a><a class="chip" href="issues/ecosystem-sovereignty.html">エコシステムの主導権</a><a class="chip" href="issues/safety-standards-participation.html">安全規格への日本の関与</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/sier-engineering-bottleneck.html">SIer工数のボトルネック</a><span class="mini">緊5・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/caregiving-robot-adoption.html">介護現場へのロボット導入の壁</a><a class="chip" href="issues/robot-literate-workforce.html">ロボットを扱える人材の不在</a><a class="chip" href="issues/roi-opacity.html">導入コストとROIの不透明さ</a><a class="chip" href="issues/price-structure-smb.html">中小企業に届かない価格構造</a><a class="chip" href="issues/motion-portability.html">動作のポータビリティ不在</a><a class="chip" href="issues/task-definition-maturity.html">タスク定義能力の未成熟</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/task-definition-maturity.html">タスク定義能力の未成熟</a><span class="mini">緊4・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/robot-literate-workforce.html">ロボットを扱える人材の不在</a><a class="chip" href="issues/tacit-knowledge-capture.html">現場知のデータ化</a><a class="chip" href="issues/roi-opacity.html">導入コストとROIの不透明さ</a><a class="chip" href="issues/motion-portability.html">動作のポータビリティ不在</a><a class="chip" href="issues/sier-engineering-bottleneck.html">SIer工数のボトルネック</a><a class="chip" href="issues/accessibility-non-engineers.html">高齢者・非エンジニアの受容性</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/domestic-hardware-hollowing.html">国内ハード産業の空洞化</a><span class="mini">緊3・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/foundation-model-concentration.html">基盤モデルの寡占</a><a class="chip" href="issues/maintenance-ecosystem.html">保守・修理のエコシステム不在</a><a class="chip" href="issues/price-structure-smb.html">中小企業に届かない価格構造</a><a class="chip" href="issues/motion-portability.html">動作のポータビリティ不在</a><a class="chip" href="issues/ecosystem-sovereignty.html">エコシステムの主導権</a><a class="chip" href="issues/safety-standards-participation.html">安全規格への日本の関与</a><a class="chip" href="issues/dual-use-regulation.html">デュアルユース規制</a></div>
+    </div>
+    <h2 class="maplist-h">安全・信頼性・事故<span class="orgcount">4</span></h2>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/human-robot-coexistence-safety.html">人とロボットの共存安全基準</a><span class="mini">緊5・深5</span></div>
+      <div class="relchips"><a class="chip" href="issues/caregiving-robot-adoption.html">介護現場へのロボット導入の壁</a><a class="chip" href="issues/public-space-operation-rules.html">公道・公共空間の走行ルール</a><a class="chip" href="issues/motion-portability.html">動作のポータビリティ不在</a><a class="chip" href="issues/liability-demarcation.html">事故時の責任分界</a><a class="chip" href="issues/failsafe-stop-design.html">暴走・誤動作の検知と停止設計</a><a class="chip" href="issues/aging-fleet-maintenance.html">経年劣化・メンテ不足による事故</a><a class="chip" href="issues/intent-legibility.html">意図の読み取りやすさ</a><a class="chip" href="issues/safety-standards-participation.html">安全規格への日本の関与</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/liability-demarcation.html">事故時の責任分界</a><span class="mini">緊4・深5</span></div>
+      <div class="relchips"><a class="chip" href="issues/maintenance-ecosystem.html">保守・修理のエコシステム不在</a><a class="chip" href="issues/public-space-operation-rules.html">公道・公共空間の走行ルール</a><a class="chip" href="issues/human-robot-coexistence-safety.html">人とロボットの共存安全基準</a><a class="chip" href="issues/failsafe-stop-design.html">暴走・誤動作の検知と停止設計</a><a class="chip" href="issues/aging-fleet-maintenance.html">経年劣化・メンテ不足による事故</a><a class="chip" href="issues/vlm-explainability.html">VLM判断の説明可能性</a><a class="chip" href="issues/autonomy-level-definition.html">自律レベルの定義不在</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/failsafe-stop-design.html">暴走・誤動作の検知と停止設計</a><span class="mini">緊4・深5</span></div>
+      <div class="relchips"><a class="chip" href="issues/sim2real-gap.html">Sim2Realギャップ</a><a class="chip" href="issues/human-robot-coexistence-safety.html">人とロボットの共存安全基準</a><a class="chip" href="issues/liability-demarcation.html">事故時の責任分界</a><a class="chip" href="issues/aging-fleet-maintenance.html">経年劣化・メンテ不足による事故</a><a class="chip" href="issues/autonomy-level-definition.html">自律レベルの定義不在</a><a class="chip" href="issues/embodied-ai-security.html">物理を持つAIのセキュリティ</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/aging-fleet-maintenance.html">経年劣化・メンテ不足による事故</a><span class="mini">緊3・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/maintenance-ecosystem.html">保守・修理のエコシステム不在</a><a class="chip" href="issues/raas-adoption-models.html">リース・サブスク等の導入モデル不在</a><a class="chip" href="issues/human-robot-coexistence-safety.html">人とロボットの共存安全基準</a><a class="chip" href="issues/liability-demarcation.html">事故時の責任分界</a><a class="chip" href="issues/failsafe-stop-design.html">暴走・誤動作の検知と停止設計</a></div>
+    </div>
+    <h2 class="maplist-h">自律性・判断・ガバナンス<span class="orgcount">4</span></h2>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/embodied-ai-security.html">物理を持つAIのセキュリティ</a><span class="mini">緊5・深5</span></div>
+      <div class="relchips"><a class="chip" href="issues/foundation-model-concentration.html">基盤モデルの寡占</a><a class="chip" href="issues/network-latency-bandwidth.html">通信インフラの遅延・帯域</a><a class="chip" href="issues/failsafe-stop-design.html">暴走・誤動作の検知と停止設計</a><a class="chip" href="issues/vlm-explainability.html">VLM判断の説明可能性</a><a class="chip" href="issues/teleop-privacy.html">遠隔操作とプライバシー</a><a class="chip" href="issues/dual-use-regulation.html">デュアルユース規制</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/vlm-explainability.html">VLM判断の説明可能性</a><span class="mini">緊4・深5</span></div>
+      <div class="relchips"><a class="chip" href="issues/sim2real-gap.html">Sim2Realギャップ</a><a class="chip" href="issues/imitation-data-quality.html">模倣学習のデータ品質</a><a class="chip" href="issues/foundation-model-concentration.html">基盤モデルの寡占</a><a class="chip" href="issues/liability-demarcation.html">事故時の責任分界</a><a class="chip" href="issues/autonomy-level-definition.html">自律レベルの定義不在</a><a class="chip" href="issues/embodied-ai-security.html">物理を持つAIのセキュリティ</a><a class="chip" href="issues/trust-calibration.html">過信と不信のバランス</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/autonomy-level-definition.html">自律レベルの定義不在</a><span class="mini">緊4・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/public-space-operation-rules.html">公道・公共空間の走行ルール</a><a class="chip" href="issues/human-robot-coexistence-safety.html">人とロボットの共存安全基準</a><a class="chip" href="issues/liability-demarcation.html">事故時の責任分界</a><a class="chip" href="issues/failsafe-stop-design.html">暴走・誤動作の検知と停止設計</a><a class="chip" href="issues/vlm-explainability.html">VLM判断の説明可能性</a><a class="chip" href="issues/safety-standards-participation.html">安全規格への日本の関与</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/teleop-privacy.html">遠隔操作とプライバシー</a><span class="mini">緊4・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/caregiving-robot-adoption.html">介護現場へのロボット導入の壁</a><a class="chip" href="issues/teleoperator-profession.html">テレオペレーターという新職種</a><a class="chip" href="issues/public-space-operation-rules.html">公道・公共空間の走行ルール</a><a class="chip" href="issues/embodied-ai-security.html">物理を持つAIのセキュリティ</a><a class="chip" href="issues/accessibility-non-engineers.html">高齢者・非エンジニアの受容性</a><a class="chip" href="issues/cross-border-motion-data.html">動作データの越境移転</a></div>
+    </div>
+    <h2 class="maplist-h">人間との関係・UX・受容<span class="orgcount">4</span></h2>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/accessibility-non-engineers.html">高齢者・非エンジニアの受容性</a><span class="mini">緊4・深5</span></div>
+      <div class="relchips"><a class="chip" href="issues/caregiving-robot-adoption.html">介護現場へのロボット導入の壁</a><a class="chip" href="issues/robot-literate-workforce.html">ロボットを扱える人材の不在</a><a class="chip" href="issues/task-definition-maturity.html">タスク定義能力の未成熟</a><a class="chip" href="issues/teleop-privacy.html">遠隔操作とプライバシー</a><a class="chip" href="issues/motion-uncanny-valley.html">動きの不気味さ（Motion Uncanny Valley）</a><a class="chip" href="issues/intent-legibility.html">意図の読み取りやすさ</a><a class="chip" href="issues/trust-calibration.html">過信と不信のバランス</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/intent-legibility.html">意図の読み取りやすさ</a><span class="mini">緊4・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/caregiving-robot-adoption.html">介護現場へのロボット導入の壁</a><a class="chip" href="issues/robot-unready-built-environment.html">ロボット前提でない建築・都市</a><a class="chip" href="issues/public-space-operation-rules.html">公道・公共空間の走行ルール</a><a class="chip" href="issues/human-robot-coexistence-safety.html">人とロボットの共存安全基準</a><a class="chip" href="issues/motion-uncanny-valley.html">動きの不気味さ（Motion Uncanny Valley）</a><a class="chip" href="issues/accessibility-non-engineers.html">高齢者・非エンジニアの受容性</a><a class="chip" href="issues/trust-calibration.html">過信と不信のバランス</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/motion-uncanny-valley.html">動きの不気味さ（Motion Uncanny Valley）</a><span class="mini">緊3・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/caregiving-robot-adoption.html">介護現場へのロボット導入の壁</a><a class="chip" href="issues/human-robot-coexistence-safety.html">人とロボットの共存安全基準</a><a class="chip" href="issues/intent-legibility.html">意図の読み取りやすさ</a><a class="chip" href="issues/accessibility-non-engineers.html">高齢者・非エンジニアの受容性</a><a class="chip" href="issues/trust-calibration.html">過信と不信のバランス</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/trust-calibration.html">過信と不信のバランス</a><span class="mini">緊3・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/liability-demarcation.html">事故時の責任分界</a><a class="chip" href="issues/vlm-explainability.html">VLM判断の説明可能性</a><a class="chip" href="issues/motion-uncanny-valley.html">動きの不気味さ（Motion Uncanny Valley）</a><a class="chip" href="issues/intent-legibility.html">意図の読み取りやすさ</a><a class="chip" href="issues/accessibility-non-engineers.html">高齢者・非エンジニアの受容性</a></div>
+    </div>
+    <h2 class="maplist-h">規格・標準・国際競争<span class="orgcount">4</span></h2>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname hot" href="issues/ecosystem-sovereignty.html">エコシステムの主導権</a><span class="mini">緊4・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/real-robot-data-scarcity.html">実機データの圧倒的不足</a><a class="chip" href="issues/foundation-model-concentration.html">基盤モデルの寡占</a><a class="chip" href="issues/charging-docking-standards.html">充電・保管・動線の標準不在</a><a class="chip" href="issues/motion-portability.html">動作のポータビリティ不在</a><a class="chip" href="issues/domestic-hardware-hollowing.html">国内ハード産業の空洞化</a><a class="chip" href="issues/safety-standards-participation.html">安全規格への日本の関与</a><a class="chip" href="issues/dual-use-regulation.html">デュアルユース規制</a><a class="chip" href="issues/cross-border-motion-data.html">動作データの越境移転</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/safety-standards-participation.html">安全規格への日本の関与</a><span class="mini">緊3・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/charging-docking-standards.html">充電・保管・動線の標準不在</a><a class="chip" href="issues/motion-portability.html">動作のポータビリティ不在</a><a class="chip" href="issues/domestic-hardware-hollowing.html">国内ハード産業の空洞化</a><a class="chip" href="issues/human-robot-coexistence-safety.html">人とロボットの共存安全基準</a><a class="chip" href="issues/autonomy-level-definition.html">自律レベルの定義不在</a><a class="chip" href="issues/ecosystem-sovereignty.html">エコシステムの主導権</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/dual-use-regulation.html">デュアルユース規制</a><span class="mini">緊3・深4</span></div>
+      <div class="relchips"><a class="chip" href="issues/foundation-model-concentration.html">基盤モデルの寡占</a><a class="chip" href="issues/domestic-hardware-hollowing.html">国内ハード産業の空洞化</a><a class="chip" href="issues/embodied-ai-security.html">物理を持つAIのセキュリティ</a><a class="chip" href="issues/ecosystem-sovereignty.html">エコシステムの主導権</a><a class="chip" href="issues/cross-border-motion-data.html">動作データの越境移転</a></div>
+    </div>
+    <div class="issuerow">
+      <div class="rowtop"><a class="iname" href="issues/cross-border-motion-data.html">動作データの越境移転</a><span class="mini">緊2・深3</span></div>
+      <div class="relchips"><a class="chip" href="issues/teleoperator-profession.html">テレオペレーターという新職種</a><a class="chip" href="issues/foundation-model-concentration.html">基盤モデルの寡占</a><a class="chip" href="issues/network-latency-bandwidth.html">通信インフラの遅延・帯域</a><a class="chip" href="issues/teleop-privacy.html">遠隔操作とプライバシー</a><a class="chip" href="issues/ecosystem-sovereignty.html">エコシステムの主導権</a><a class="chip" href="issues/dual-use-regulation.html">デュアルユース規制</a></div>
+    </div>
+  </div>
+</main>
+<footer id="about">
+  <div class="wrap">
+    <p class="selfdef">事実・解釈・提案を分け、出典と更新履歴を残しながら育てるオープンな課題地図です。</p>
+    <h4>このサイトについて（ディスクレーマー）</h4>
+    <ul>
+      <li><b>生成AIによる制作・評価版です。</b>本文・図・サイトのコードは生成AIが作成し、人手で点検しています。誤りや古い情報を含む可能性があるため、重要な判断は各ページの一次出典に当たってご確認ください。気づいた点や事実誤認のご指摘を歓迎し、内容は随時更新します。</li>
+      <li><b>特定のメーカー・エコシステムの立場はとりません。</b>「人とロボットが共存する社会の持続可能性と体験の質を、長期にわたって維持・向上できるか」を最優先の判断軸として課題を選び、緊急度と深刻度で優先度を示しています。賛否が分かれる論点は結論を断定せず、対立軸と出典を併記します。</li>
+      <li><b>中立を志向しますが、完全な無偏りを保証するものではありません。</b>課題の選び方や表現に偏りが残ることがあります。事実・解釈・提案を分け、トレードオフや反対論も併記するよう努めています。</li>
+    </ul>
+    <p class="flinks"><a href="map.html">課題マップ</a>・<a href="sources.html">出典・データ集</a>・<a href="index.html#about">このサイトについて</a></p>
+  </div>
+</footer>
+<script>
+(function(){
+  var nodes = Array.prototype.slice.call(document.querySelectorAll('.node'));
+  var edges = Array.prototype.slice.call(document.querySelectorAll('.edge'));
+  var byId = {};
+  nodes.forEach(function(n){ byId[n.dataset.id] = n; });
+  var adj = {};
+  edges.forEach(function(e){
+    (adj[e.dataset.a] = adj[e.dataset.a] || []).push(e.dataset.b);
+    (adj[e.dataset.b] = adj[e.dataset.b] || []).push(e.dataset.a);
+  });
+  var filter = 'all';
+  var box = document.querySelector('.mapbox');
+  var tip = document.getElementById('tip');
+
+  function applyBase(){
+    nodes.forEach(function(n){
+      n.classList.toggle('dim', filter !== 'all' && n.dataset.cat !== filter);
+    });
+    edges.forEach(function(e){
+      e.classList.remove('lit');
+      var on = filter === 'all' ||
+        (byId[e.dataset.a].dataset.cat === filter && byId[e.dataset.b].dataset.cat === filter);
+      e.classList.toggle('dim', !on);
+    });
+  }
+
+  nodes.forEach(function(n){
+    n.addEventListener('mouseenter', function(){
+      var id = n.dataset.id;
+      nodes.forEach(function(m){ m.classList.add('dim'); });
+      edges.forEach(function(e){ e.classList.add('dim'); e.classList.remove('lit'); });
+      n.classList.remove('dim');
+      (adj[id] || []).forEach(function(j){ byId[j].classList.remove('dim'); });
+      edges.forEach(function(e){
+        if (e.dataset.a === id || e.dataset.b === id){ e.classList.remove('dim'); e.classList.add('lit'); }
+      });
+      tip.innerHTML = '<strong>' + n.dataset.title + '</strong><br>' + n.dataset.catname +
+        '<br>緊急度 ' + n.dataset.urg + ' / 深刻度 ' + n.dataset.sev;
+      tip.style.display = 'block';
+      var br = box.getBoundingClientRect();
+      var nr = n.getBoundingClientRect();
+      var left = nr.left - br.left + nr.width + 10;
+      var top = nr.top - br.top - 8;
+      if (left + 260 > br.width) left = nr.left - br.left - 270;
+      if (left < 0) left = 8;
+      tip.style.left = left + 'px';
+      tip.style.top = Math.max(4, top) + 'px';
+    });
+    n.addEventListener('mouseleave', function(){
+      tip.style.display = 'none';
+      edges.forEach(function(e){ e.classList.remove('lit'); });
+      applyBase();
+    });
+    n.addEventListener('click', function(){
+      location.href = 'issues/' + n.dataset.slug + '.html';
+    });
+  });
+
+  document.querySelectorAll('.legend button').forEach(function(b){
+    b.addEventListener('click', function(){
+      filter = b.dataset.cat;
+      document.querySelectorAll('.legend button').forEach(function(x){
+        x.classList.toggle('active', x === b);
+      });
+      applyBase();
+    });
+  });
+})();
+</script>
+</body>
+</html>
