@@ -165,5 +165,5 @@ status: draft
 ## 出典・関連課題・更新履歴
 
 - 出典：インクルーシブデザインの手法、Pixels to Motors の体験設計哲学（具体は※要出典確認）。
-- 関連課題：[介護現場へのロボット導入の壁](caregiving-robot-adoption.md) / [ロボットを扱える人材の不在](robot-literate-workforce.md) / [動きの不気味さ](motion-uncanny-valley.md) / [意図の読み取りやすさ](intent-legibility.md) / [過信と不信のバランス](trust-calibration.md)
+- 関連課題：[介護現場へのロボット導入の壁](caregiving-robot-adoption.md) / [ロボットを扱える人材の不在](robot-literate-workforce.md) / [動きの不気味さ（Motion Uncanny Valley）](motion-uncanny-valley.md) / [意図の読み取りやすさ](intent-legibility.md) / [過信と不信のバランス](trust-calibration.md)
 - 更新履歴：2026-06-12 初版（draft・定量データ未検証）

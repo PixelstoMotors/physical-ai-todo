@@ -165,5 +165,5 @@ status: draft
 ## 出典・関連課題・更新履歴
 
 - 出典：trust calibration（適切な信頼）の研究、確信度提示の設計（具体は※要出典確認）。
-- 関連課題：[VLM判断の説明可能性](vlm-explainability.md) / [動きの不気味さ](motion-uncanny-valley.md) / [意図の読み取りやすさ](intent-legibility.md) / [高齢者・非エンジニアの受容性](accessibility-non-engineers.md)
+- 関連課題：[VLM判断の説明可能性](vlm-explainability.md) / [動きの不気味さ（Motion Uncanny Valley）](motion-uncanny-valley.md) / [意図の読み取りやすさ](intent-legibility.md) / [高齢者・非エンジニアの受容性](accessibility-non-engineers.md)
 - 更新履歴：2026-06-12 初版（draft・定量データ未検証）

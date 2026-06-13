@@ -95,9 +95,10 @@ article p{margin:10px 0}
 article ul,article ol{padding-left:1.5em;margin:10px 0}
 article li{margin:6px 0}
 article a{text-decoration:underline;text-underline-offset:2px}
-article table{border-collapse:collapse;width:100%;font-size:13px;margin:16px 0;line-height:1.7;border:1.5px solid var(--ink)}
+article table{border-collapse:collapse;width:100%;font-size:13px;margin:16px 0;line-height:1.7;border:1.5px solid var(--ink);display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
 article th,article td{border:1px solid var(--ink);padding:8px 11px;text-align:left;vertical-align:top}
 article th{background:var(--chipbg);font-weight:700;white-space:nowrap}
+@media(max-width:640px){article th{white-space:normal}}
 .thesis{border:1.5px solid var(--ink);padding:14px 18px;margin:22px 0;font-weight:700;line-height:1.9}
 .skeleton-note{font-size:12px;color:var(--sub);border:1.5px dashed var(--ink);padding:10px 14px;margin:18px 0;font-family:"IBM Plex Mono","Noto Sans JP",monospace}
 

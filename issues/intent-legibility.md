@@ -42,7 +42,7 @@ status: draft
 ## 課題の定義（扱う／扱わない）
 
 - **扱う**：ロボットが次に何をするかを周囲の人が予測できず、共存・協働が成立しない問題。
-- **扱わない**：動きの質感・不気味さ（[動きの不気味さ](motion-uncanny-valley.md)で扱う）。本カードは「次の行動の予測可能性」に絞る。
+- **扱わない**：動きの質感・不気味さ（[動きの不気味さ（Motion Uncanny Valley）](motion-uncanny-valley.md)で扱う）。本カードは「次の行動の予測可能性」に絞る。
 - **似て非なる**：動きの不気味さ（別カード）は動きの印象・質感の問題、本カードは次の行動が読めるかという予測可能性の問題。
 
 ## 何が起きているか（データ）
@@ -166,5 +166,5 @@ status: draft
 ## 出典・関連課題・更新履歴
 
 - 出典：legible motion 関連研究、配送ロボットの意図表示事例（具体は※要出典確認）、Pixels to Motors の Motion UX。
-- 関連課題：[動きの不気味さ](motion-uncanny-valley.md) / [人とロボットの共存安全基準](human-robot-coexistence-safety.md) / [公道・公共空間の走行ルール](public-space-operation-rules.md) / [高齢者・非エンジニアの受容性](accessibility-non-engineers.md) / [過信と不信のバランス](trust-calibration.md)
+- 関連課題：[動きの不気味さ（Motion Uncanny Valley）](motion-uncanny-valley.md) / [人とロボットの共存安全基準](human-robot-coexistence-safety.md) / [公道・公共空間の走行ルール](public-space-operation-rules.md) / [高齢者・非エンジニアの受容性](accessibility-non-engineers.md) / [過信と不信のバランス](trust-calibration.md)
 - 更新履歴：2026-06-12 初版（draft・定量データ未検証）
