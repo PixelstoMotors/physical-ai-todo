@@ -21,19 +21,19 @@
   <div class="wrap">
     <div class="sheet">
       <div class="inner">
-        <p class="crumb"><a href="../categories/human-ux.html">人間との関係・UX・受容</a></p>
+        <p class="crumb"><a href="../categories/human-ux.html">人間との関係・UX・受容</a> / Motion UX</p>
         <h1 class="pagetitle">動きの不気味さ（Motion Uncanny Valley）</h1>
         <p class="pagedesc">人間らしすぎる・速すぎる・意図が読めない動きが不安を生む。動作品質の設計論が確立していない。</p>
         <div class="meterrow"><span class="gap">緊急度 <span class="don ">■■■</span><span class="doff">□□</span></span><span>深刻度 <span class="don sev">■■■■</span><span class="doff">□</span></span></div>
-        <div class="chips"><span class="chip">最終確認: 2026-06-12</span><span class="chip layer">体験設計で解く</span><span class="chip">5年以内</span></div>
-        <p class="skeleton-note">このページは骨格のみの未執筆版です。各セクションはテンプレートに沿って今後埋めていきます。</p>
+        <div class="chips"><span class="chip">最終確認: 2026-06-12</span><span class="chip">メーカー</span><span class="chip">デザイナー</span><span class="chip">研究者</span><span class="chip">ユーザー企業</span><span class="chip">#Motion UX</span><span class="chip">#不気味の谷</span><span class="chip">#動作品質</span><span class="chip layer">体験設計で解く</span><span class="chip">5年以内</span></div>
+        
         <article>
-<div class="thesis"><strong>（一文の定義：この課題が「単なる◯◯不足ではなく、△△の構造問題である」ことを太字一文で言い切る）</strong></div>
+<div class="thesis"><strong>動きの不気味さは、見た目のデザインの問題ではなく、ロボットの「動き方」そのものが人に不安や違和感を与えるのに、それを設計する論が存在しないという、Motion UXの空白の問題である。</strong></div>
 <h2>30秒要約</h2>
 <ul>
-<li>（データ1：現状を示す事実。出典つき）</li>
-<li>（データ2：構造を示す事実。出典つき）</li>
-<li>（最初の一歩：何から手を付けるべきか）</li>
+<li>森政弘の「不気味の谷」は見た目の話だが、ロボットの「動き」にも同じ谷がある。人間らしすぎる・速すぎる・滑らかすぎる動きが不安を生む。</li>
+<li>動作品質をどう設計すれば人が安心して共存できるか、という設計論（Motion UX）が確立していない。</li>
+<li>最初の一歩は、動きの品質を体験として設計する論を立て、「機械的だが優雅」のような不気味さを避ける方向を探ること。</li>
 </ul>
 <h2>実装判断サマリー</h2>
 <table>
@@ -46,64 +46,76 @@
 <tbody>
 <tr>
 <td>いま何が問題か</td>
-<td></td>
+<td>ロボットの動き方が不安・違和感を生むが、設計する論がない</td>
 </tr>
 <tr>
 <td>なぜ今か</td>
-<td></td>
+<td>サービス・共存ロボットが人の生活に入り、動きの印象が受容を左右する</td>
 </tr>
 <tr>
 <td>最大の制約</td>
-<td></td>
+<td>動作品質を体験として設計する方法論の不在</td>
 </tr>
 <tr>
 <td>主なレバー</td>
-<td></td>
+<td>Motion UXの設計論、不気味さを避ける動作設計</td>
 </tr>
 <tr>
 <td>最重要KPI</td>
-<td></td>
+<td>動きに対する安心感・受容度</td>
 </tr>
 <tr>
 <td>争点</td>
-<td></td>
+<td>人間らしさを目指すか、機械的だが優雅な方向を目指すか</td>
 </tr>
 </tbody>
 </table>
 <h2>課題の定義（扱う／扱わない）</h2>
 <ul>
-<li><strong>扱う</strong>：</li>
-<li><strong>扱わない</strong>：</li>
-<li><strong>似て非なる</strong>：</li>
+<li><strong>扱う</strong>：ロボットの動き方そのものが人に不安・違和感を与える問題と、動作品質を設計する論の不在。</li>
+<li><strong>扱わない</strong>：次に何をするかの予測可能性（<a href="intent-legibility.html">意図の読み取りやすさ</a>で扱う）。本カードは「動きの質感・印象」に絞る。</li>
+<li><strong>似て非なる</strong>：意図の読み取りやすさ（別カード）は「次の行動が予測できるか」の問題、本カードは「動きそのものが不気味でないか」という質感の問題。</li>
 </ul>
 <h2>何が起きているか（データ）</h2>
 <ul>
-<li>（事実1。出典）</li>
-<li>（事実2。出典）</li>
+<li>森政弘が1970年に提唱した「不気味の谷」は、ロボットの見た目が人間に近づくほど、ある時点で急に不気味に感じられる現象を指す。</li>
+<li>同じ谷が「動き」にもある。人間らしすぎる動き、速すぎる動き、不自然に滑らかな動き、意図の読めない動きが、人に不安や違和感を与える。</li>
+<li>見た目のデザインには長い蓄積があるが、「動作品質をどう設計すれば人が安心できるか」というMotion UXの設計論は確立していない。</li>
+<li>本サイトの母体プロジェクト（Pixels to Motors）は、この「動きの不気味の谷」をMotion UXの中心テーマに据え、「機械的だが優雅（mechanical-but-graceful）」な方向——人間を模倣しきらず、しかし不快でない動き——が未開拓の領域であると位置づけている。</li>
 </ul>
 <h2>なぜ先送りされてきたか</h2>
 <ul>
-<li></li>
+<li>ロボット開発は「動く・タスクを達成する」ことが優先され、動きの質感は二の次だった。</li>
+<li>動作品質は主観的で、定量化・設計論化が難しい。</li>
+<li>見た目のデザインに比べ、「動きのデザイン」という発想自体が新しい。</li>
+<li>産業用（隔離環境）では人がそばにいないため、動きの印象が問題にならなかった。</li>
 </ul>
 <h2>原因構造</h2>
 <ul>
-<li><strong>需要側</strong>：</li>
-<li><strong>供給側</strong>：</li>
-<li><strong>構造側</strong>：</li>
+<li><strong>設計側</strong>：動作品質を体験として設計する論・方法がない。</li>
+<li><strong>評価側</strong>：動きの不気味さ・安心感を測る基準がなく、改善が回らない。</li>
+<li><strong>発想側</strong>：「人間に近づける」方向が暗黙の目標とされ、別の方向（機械的だが優雅）が探られてこなかった。</li>
+<li>これらが相互に強化し合い、動きが不気味→人が不安→共存が進まない、という循環になりうる。</li>
 </ul>
 <h2>誰が、どう困るか（影響）</h2>
 <ul>
-<li></li>
+<li><strong>共存する人</strong>：ロボットの動きに不安・違和感を覚え、安心して共にいられない。</li>
+<li><strong>メーカー・デザイナー</strong>：動作品質の設計指針がなく、何を目指せばよいか分からない。</li>
+<li><strong>ユーザー企業</strong>：導入しても利用者・現場が動きを受け入れず、定着しない。</li>
+<li><strong>社会全体</strong>：動きの印象が悪いと、人の生活空間でのロボット利用が広がらない。</li>
 </ul>
 <h2>放置するとどうなるか（時間軸）</h2>
 <ul>
-<li><strong>数年</strong>：</li>
-<li><strong>中期（2030年代）</strong>：</li>
-<li><strong>長期（2040年前後）</strong>：</li>
+<li><strong>数年</strong>：動きの不気味さが、サービス・共存ロボットの受容を妨げる。</li>
+<li><strong>中期（2030年代）</strong>：動作品質を設計できる作り手とできない作り手で、受容性に差が出る。</li>
+<li><strong>長期（2040年前後）</strong>：動作品質（Motion UX）の巧拙が、ロボットが人の生活に入れるかどうかを分ける。</li>
 </ul>
 <h2>解決の方向性</h2>
 <ul>
-<li></li>
+<li><strong>Motion UXの設計論</strong>：動作品質を体験として設計する方法論を立てる。</li>
+<li><strong>不気味さを避ける方向</strong>：人間を模倣しきらず、機械的だが優雅な動き（Direction B）を探る。</li>
+<li><strong>意図と質感の両立</strong>：次の行動が読め（<a href="intent-legibility.html">意図の読み取りやすさ</a>）、かつ動きが不快でない設計。</li>
+<li><strong>評価基準の確立</strong>：動きの安心感・不気味さを測る基準と改善のループ。</li>
 </ul>
 <h2>選択肢の比較</h2>
 <table>
@@ -119,80 +131,110 @@
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>機械的だが優雅な方向</td>
+<td>高</td>
+<td>中</td>
+<td>中〜高</td>
+<td>設計論が未確立</td>
+<td>未開拓の領域</td>
+</tr>
+<tr>
+<td>人間らしさの追求</td>
+<td>中</td>
+<td>高</td>
+<td>高</td>
+<td>不気味の谷に落ちる</td>
+<td>谷を越えるのは難しい</td>
+</tr>
+<tr>
+<td>評価基準＋改善ループ</td>
+<td>中〜高</td>
+<td>中</td>
+<td>中</td>
+<td>主観の定量化</td>
+<td>改善の土台</td>
+</tr>
+<tr>
+<td>動きの質感を問わない</td>
+<td>低</td>
+<td>低</td>
+<td>低</td>
+<td>不気味さが残る</td>
+<td>受容が進まない</td>
 </tr>
 </tbody>
 </table>
 <h2>主体別アクション</h2>
-<h3>メーカー</h3>
+<h3>メーカー・デザイナー</h3>
 <ul>
-<li>レバー：</li>
-<li>変えるもの：</li>
-<li>制約：</li>
-<li>成果指標：</li>
+<li>レバー：動作品質の設計、機械的だが優雅な動きの追求、ユーザー検証。</li>
+<li>変えるもの：動けばよいから、安心できる動きへ。</li>
+<li>制約：設計論・評価基準の不在。</li>
+<li>成果指標：動きに対する安心感・受容度。</li>
 </ul>
-<h3>SIer・導入事業者</h3>
+<h3>研究者</h3>
 <ul>
-<li>レバー：</li>
-<li>変えるもの：</li>
-<li>制約：</li>
-<li>成果指標：</li>
+<li>レバー：Motion UXの設計論、動きの印象の評価手法、不気味の谷の動作版の解明。</li>
+<li>変えるもの：主観的な印象を、設計可能な知見へ。</li>
+<li>制約：動作品質の定量化の難しさ。</li>
+<li>成果指標：設計論・評価手法の確立。</li>
 </ul>
 <h3>ユーザー企業・現場</h3>
 <ul>
-<li>レバー：</li>
-<li>変えるもの：</li>
-<li>制約：</li>
-<li>成果指標：</li>
-</ul>
-<h3>研究者・コミュニティ</h3>
-<ul>
-<li>レバー：</li>
-<li>変えるもの：</li>
-<li>制約：</li>
-<li>成果指標：</li>
+<li>レバー：利用者の反応の観察、動きへのフィードバック。</li>
+<li>変えるもの：機能だけの評価から、動きの印象も含む評価へ。</li>
+<li>制約：評価の知見。</li>
+<li>成果指標：利用者の受容・安心。</li>
 </ul>
 <h2>争点</h2>
 <ul>
-<li></li>
+<li><strong>目指す方向</strong>：人間らしさを目指すか、機械的だが優雅な方向を目指すか。</li>
+<li><strong>定量化</strong>：主観的な「不気味さ・安心感」をどこまで測れるか。</li>
+<li><strong>文化差</strong>：動きの印象は文化・個人で異なり、どう一般化するか。</li>
 </ul>
 <h2>反対論・トレードオフ</h2>
 <ul>
-<li><strong>（最も強い反対）</strong>：</li>
-<li><strong>応答</strong>：</li>
+<li><strong>「動きの質感は些末で、タスクが正確にできれば人は慣れる」（最も強い反対）</strong>：機能が達成されれば動きの印象は問題でなく、慣れで解決するという主張。</li>
+<li><strong>応答</strong>：産業用の隔離環境ではその通りでも、介護・サービス・家庭のように人がそばにいる用途では、動きの印象が受容を直接左右する。慣れに任せると、最初の不快さで拒否され、慣れる段階に至らない。動きの質感は些末ではなく、人の生活空間に入るロボットの受容の核心になる。</li>
+<li><strong>公平性</strong>：動作品質を作り込める大手と、機能優先の中小で受容性に差。</li>
+<li><strong>副作用</strong>：動きの優雅さを追求しすぎると、速度・効率が犠牲になる。</li>
 </ul>
 <h2>失敗のシナリオ（プレモーテム）</h2>
 <ul>
-<li></li>
+<li><strong>動きの不気味さが放置される</strong>：人がそばにいる用途で拒否される。</li>
+<li><strong>人間らしさを目指して谷に落ちる</strong>：かえって不気味さが増す。</li>
+<li><strong>評価基準がなく改善が回らない</strong>：主観頼みで設計が安定しない。</li>
+<li><strong>優雅さを追求して効率を失う</strong>：実用性とのバランスを欠く。</li>
 </ul>
 <h2>KPI</h2>
 <ul>
-<li><strong>結果指標</strong>：</li>
-<li><strong>中間指標</strong>：</li>
-<li><strong>副作用指標</strong>：</li>
+<li><strong>結果指標</strong>：動きに対する安心感・受容度。</li>
+<li><strong>中間指標</strong>：Motion UX設計論・評価手法の整備、機械的だが優雅な動作の実装。</li>
+<li><strong>副作用指標</strong>：動作品質の追求による速度・効率の低下。</li>
 </ul>
 <h2>未解決の問い</h2>
 <ul>
-<li></li>
+<li>「機械的だが優雅」な動きを、どう具体的に設計するか。</li>
+<li>動きの不気味さ・安心感をどう測り、改善に回すか。</li>
+<li>動きの印象の文化差・個人差をどう扱うか。</li>
+<li>動作品質と速度・効率のトレードオフをどう設計するか。</li>
 </ul>
 <h2>すでにある良い事例</h2>
 <ul>
-<li></li>
+<li><strong>森政弘「不気味の谷」（1970）</strong>：見た目の不気味さの古典的知見で、動きへの拡張の出発点。</li>
+<li><strong>Pixels to Motors の Motion UX 研究</strong>：「動きの不気味の谷」をテーマに、機械的だが優雅な方向（Direction B）を未開拓領域として探る取り組み。</li>
 </ul>
 <h2>10年後の望ましい状態</h2>
 <ul>
-<li></li>
+<li>動作品質を体験として設計するMotion UXの論が確立している。</li>
+<li>人間を模倣しきらない、機械的だが優雅で不快でない動きが普及している。</li>
+<li>人がそばにいても安心できる動きが、共存ロボットの前提になっている。</li>
 </ul>
 <h2>出典・関連課題・更新履歴</h2>
 <ul>
-<li>出典：（一次出典を列挙。未確認のものは ※要出典確認 を付す）</li>
-<li>関連課題：</li>
-<li>更新履歴：</li>
+<li>出典：森政弘「不気味の谷」（Energy誌, 1970）、Pixels to Motors の Motion UX 研究。</li>
+<li>関連課題：<a href="intent-legibility.html">意図の読み取りやすさ</a> / <a href="accessibility-non-engineers.html">高齢者・非エンジニアの受容性</a> / <a href="trust-calibration.html">過信と不信のバランス</a> / <a href="caregiving-robot-adoption.html">介護現場へのロボット導入の壁</a></li>
+<li>更新履歴：2026-06-12 初版（draft・定量データ未検証）</li>
 </ul>
         </article>
       </div>
