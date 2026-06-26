@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mechArm データ構造 設計図 — live / twin / real + pose_id</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d0d0d; --paper:#f5f5f0; --card:#ffffff; --soft:#e8e6df;
+    --line:#cdc9bf; --mut:#6a635a; --accent:#c0362c; --accent-soft:#f5e4e1;
+    --sans:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;
+    --mono:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.55; padding:30px 18px 60px; font-size:14px}
+  .sheet{max-width:1160px; margin:0 auto}
+  .mono{font-family:var(--mono)}
+  .ico{width:18px; height:18px; stroke:currentColor; stroke-width:1.7; fill:none; stroke-linecap:round; stroke-linejoin:round; vertical-align:-3px; flex:0 0 auto}
+
+  header{border-bottom:2px solid var(--ink); padding-bottom:13px}
+  .kicker{font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--mut)}
+  h1{font-size:22px; margin:7px 0 4px; font-weight:700; letter-spacing:-.01em}
+  .sub{font-size:12.5px; color:var(--mut); margin:0; max-width:820px}
+
+  .tabs{display:flex; margin:22px 0 0; border-bottom:1.5px solid var(--ink)}
+  .tab{appearance:none; background:var(--card); border:1.5px solid var(--ink); border-bottom:none; font-family:var(--sans); font-size:13px; font-weight:700; color:var(--ink); padding:11px 22px; cursor:pointer; border-radius:4px 4px 0 0; margin-right:6px; transform:translateY(1.5px); display:inline-flex; align-items:center; gap:8px}
+  .tab .ico{width:15px; height:15px}
+  .tab[aria-selected="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+  .tab:hover:not([aria-selected="true"]){background:var(--soft)}
+  .panel{display:none; padding-top:8px}
+  .panel.active{display:block; animation:fade .18s ease}
+  @keyframes fade{from{opacity:0; transform:translateY(4px)}to{opacity:1; transform:none}}
+
+  h2.sec{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--mut); border-bottom:1px solid var(--line); padding-bottom:6px; margin:30px 0 16px}
+  h2.sec .n{color:var(--ink); font-weight:700; margin-right:8px}
+  h2.sec:first-of-type{margin-top:18px}
+
+  .pid{background:var(--accent); color:#fff; font-family:var(--mono); font-weight:600; padding:1px 6px; border-radius:3px; font-size:11px; white-space:nowrap}
+  .warn-txt{color:var(--accent); font-weight:700}
+
+  .figwrap{border:1.5px solid var(--ink); border-radius:4px; background:var(--card); padding:16px 14px; overflow-x:auto}
+  .fig{width:100%; height:auto; min-width:580px; display:block}
+  .cap{font-size:11.5px; color:var(--mut); margin:9px 2px 0}
+  .legend{display:flex; flex-wrap:wrap; gap:6px 16px; margin:9px 2px 0; font-size:11px; color:var(--mut)}
+  .lgnd{display:inline-flex; align-items:center; gap:6px}
+  .sh{display:inline-block; width:20px; height:13px; border:1.4px solid var(--ink); background:var(--card)}
+  .sh.term{border-radius:7px}
+  .sh.data{background:var(--soft); transform:skewX(-18deg)}
+  .sh.dec{width:12px; height:12px; transform:rotate(45deg)}
+
+  .fig .box{fill:var(--card); stroke:var(--ink); stroke-width:1.5}
+  .fig .dim{fill:var(--soft)}
+  .fig .arm{fill:var(--card); stroke:var(--ink); stroke-width:2.5}
+  .fig .actor{fill:var(--ink); stroke:var(--ink); stroke-width:2.5}
+  .fig .ttl-w{font-weight:700; font-size:13px; fill:#ffffff}
+  .fig .role-w{font-size:10px; fill:#cfc9bd}
+  .fig .ttl{font-weight:700; font-size:13px; fill:var(--ink)}
+  .fig .role{font-size:10px; fill:var(--mut)}
+  .fig .loc{font-size:9px; fill:var(--mut)}
+  .fig .file-l{font-family:var(--mono); font-size:9.5px; fill:var(--ink)}
+  .fig .file-w{font-family:var(--mono); font-size:8.5px; fill:#d8d4ca}
+  .fig .src{font-family:var(--mono); font-size:9px; fill:var(--mut); text-anchor:middle}
+  .fig .lab{font-size:11px; fill:var(--mut)}
+  .fig text.mono{font-family:var(--mono)}
+  .fig .edge{fill:none; stroke:var(--ink); stroke-width:1.5; marker-end:url(#ar1)}
+  .fig .pedge{fill:none; stroke:var(--accent); stroke-width:1.6}
+  .fig .pdot{fill:var(--accent)}
+  .fig .pchip{fill:var(--accent)}
+  .fig .pchip-t{fill:#fff; font-family:var(--mono); font-size:10.5px; font-weight:600}
+  .fig .ico-svg{fill:none; stroke:var(--ink); stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round}
+  .fig .ico-w{fill:none; stroke:#fff; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round}
+  .fig .term,.fig .proc,.fig .dec{fill:var(--card); stroke:var(--ink); stroke-width:1.5}
+  .fig .data{fill:var(--soft); stroke:var(--ink); stroke-width:1.5}
+  .fig .flowedge{fill:none; stroke:var(--ink); stroke-width:1.5; marker-end:url(#ar2)}
+  .fig .ntext{font-size:11.5px; fill:var(--ink); text-anchor:middle}
+  .fig .ntext-b{font-weight:700}
+  .fig .small{font-size:10px; fill:var(--mut); text-anchor:middle}
+  .fig .elab{font-size:10.5px; fill:var(--mut)}
+  .fig .r{fill:var(--accent); font-weight:600}
+  .fig .twin-note{fill:var(--soft); stroke:var(--mut); stroke-width:1.3; stroke-dasharray:5 4}
+
+  .tbl-wrap{overflow-x:auto; border:1.5px solid var(--ink); border-radius:4px; background:var(--card)}
+  table{border-collapse:collapse; width:100%; font-size:11.5px; min-width:880px}
+  th,td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top}
+  thead th{background:var(--ink); color:var(--paper); font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.dim td{background:#f3f1ec}
+  .tag{display:inline-block; font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.04em; padding:1px 6px; border:1px solid var(--ink); border-radius:3px}
+  .tag.dim{background:var(--soft)}
+  .path{font-family:var(--mono); font-size:10.5px; word-break:break-all; color:var(--ink); line-height:1.45}
+  .rw{font-family:var(--mono); font-size:10.5px}
+  .lock{color:var(--accent); font-weight:700}
+  .ok{color:#2f7d3f; font-weight:700}
+  .subnote{font-size:11.5px; color:var(--mut); border-left:2px solid var(--line); padding-left:11px; margin:14px 2px 0}
+  .subnote b{color:var(--ink)}
+  .subnote ul{margin:6px 0 0; padding-left:18px}
+  .subnote li{margin:3px 0}
+  .filelist{font-family:var(--mono); font-size:10.5px; color:var(--ink); margin:5px 0 0; padding-left:16px; line-height:1.7}
+
+  .resolved{margin:18px 0 0; border:1.5px solid #2f7d3f; border-radius:4px; background:#e9f3ec; padding:13px 16px}
+  .resolved h4{margin:0 0 5px; color:#2f7d3f; font-size:13px; font-weight:700; display:flex; align-items:center; gap:8px}
+  .resolved p{margin:0; font-size:12px}
+
+  footer{margin-top:34px; padding-top:13px; border-top:1px solid var(--line); font-size:11px; color:var(--mut)}
+
+  @media (max-width:820px){ body{padding:20px 13px 44px} .tab{padding:10px 14px} }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header>
+    <div class="kicker">mechArm 270 Pi · データアーキテクチャ リファレンス</div>
+    <h1>mechArm に使っているデータの全体図</h1>
+    <p class="sub">live（入力）／ twin（変換器）／ real（出力）の3系統と、それを束ねる pose_id。「イメージ図」で関係を絵で掴み、「全体解説」で絶対パスと根拠を確認する。件数・行数などデータ増加で変わる数値は載せない。パスは実機調査とコード根拠で確定（省略なし）。 DAY257 の新設計＝<b>補正記憶</b>（実機で測ったズレを位置ごとに貯め、次の狙いを補正する学習層）も破線で併記。これは現行コードには<b>未実装・コード未確認</b>。</p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" id="tab-img" role="tab" aria-selected="true" aria-controls="panel-img">
+      <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 16l-5-5L5 20"/></svg>
+      イメージ図
+    </button>
+    <button class="tab" id="tab-doc" role="tab" aria-selected="false" aria-controls="panel-doc">
+      <svg class="ico" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
+      全体解説
+    </button>
+  </div>
+
+  <!-- ============ TAB A: イメージ図 ============ -->
+  <section class="panel active" id="panel-img" role="tabpanel" aria-labelledby="tab-img">
+
+    <h2 class="sec"><span class="n">①</span>三系統アーキテクチャ ── live / twin / real</h2>
+    <div class="figwrap">
+      <svg class="fig" viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="live(j0_sweep_adopted/*.json) を読み real(pick_place_ledger_v3.csv) に書く。twin(fk_scan_motion_based_v2.csv) は読まれない予測器。pose_id が三系統をつなぐ。補正記憶（位置→Δ(x,z)）は新設計の学習層で未実装。">
+        <defs><marker id="ar1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#0d0d0d"/></marker></defs>
+
+        <path class="edge" d="M220 117 H291"/>
+        <text class="lab" x="256" y="109" text-anchor="middle">読む</text>
+        <path class="edge" d="M489 117 H560"/>
+        <text class="lab" x="524" y="109" text-anchor="middle">書く</text>
+
+        <!-- LIVE -->
+        <rect class="box" x="30" y="52" width="190" height="130"/>
+        <g class="ico-svg" transform="translate(117,66)"><path d="M0 0h9l4 4v12H0z"/><path d="M9 0v4h4"/><path d="M3 9h7M3 12h7"/></g>
+        <text class="ttl" x="125" y="104" text-anchor="middle">採用姿勢</text>
+        <text class="role mono" x="125" y="121" text-anchor="middle">live · 入力 · 読む</text>
+        <text class="file-l" x="125" y="139" text-anchor="middle">j0_sweep_adopted/*.json</text>
+        <text class="loc" x="125" y="154" text-anchor="middle">Mac 内蔵 / scripts</text>
+
+        <!-- ARM (actor: 黒ベースでデータ類と区別) -->
+        <rect class="actor" x="295" y="47" width="190" height="140"/>
+        <g class="ico-w" transform="translate(378,62)"><rect x="3" y="22" width="14" height="3"/><path d="M10 22V14"/><path d="M10 14L19 7"/><path d="M19 7l-2 -3M19 7l3 -1"/></g>
+        <text class="ttl-w mono" x="390" y="103" text-anchor="middle">run_pick_place</text>
+        <text class="role-w" x="390" y="120" text-anchor="middle">アーム本体</text>
+        <text class="file-w" x="390" y="139" text-anchor="middle">run_pick_place.py / j0_lookup.py</text>
+
+        <!-- REAL -->
+        <rect class="box" x="560" y="52" width="190" height="130"/>
+        <g class="ico-svg" transform="translate(647,66)"><path d="M0 16l3 -.6 9.5 -9.5L9.4 2.4 0 12z"/><path d="M8 4l3.5 3.5"/></g>
+        <text class="ttl" x="655" y="104" text-anchor="middle">試行台帳・run記録</text>
+        <text class="role mono" x="655" y="121" text-anchor="middle">real · 出力 · 書く</text>
+        <text class="file-l" x="655" y="139" text-anchor="middle">pick_place_ledger_v3.csv</text>
+        <text class="loc" x="655" y="154" text-anchor="middle">KIOXIA SSD</text>
+
+        <!-- TWIN -->
+        <rect class="box dim" x="295" y="250" width="190" height="120"/>
+        <g class="ico-svg" transform="translate(379,260)"><rect x="4" y="4" width="14" height="14" rx="2"/><path d="M-2 11h6M18 11h6"/></g>
+        <text class="ttl" x="390" y="296" text-anchor="middle">FKテーブル</text>
+        <text class="role mono" x="390" y="313" text-anchor="middle">twin · 変換器 · 読まない</text>
+        <text class="file-l" x="390" y="331" text-anchor="middle">fk_scan_motion_based_v2.csv</text>
+        <text class="loc" x="390" y="346" text-anchor="middle">Mac 内蔵 ＋ Unity</text>
+
+        <!-- pose_id hub -->
+        <path class="pedge" d="M360 210 L127 182"/>
+        <path class="pedge" d="M420 210 L653 182"/>
+        <path class="pedge" d="M390 221 V250"/>
+        <circle class="pdot" cx="127" cy="182" r="3"/>
+        <circle class="pdot" cx="653" cy="182" r="3"/>
+        <circle class="pdot" cx="390" cy="250" r="3"/>
+        <rect class="pchip" x="350" y="199" width="80" height="22" rx="4"/>
+        <g class="ico-w" transform="translate(357,204)"><circle cx="4" cy="4.5" r="3"/><path d="M6.3 6.2L12 12M9.8 9.8l1.4 -1.4M11.2 11.2l1.4 -1.4"/></g>
+        <text class="pchip-t" x="374" y="214">pose_id</text>
+
+        <!-- correction memory (new design / not implemented) -->
+        <rect class="twin-note" x="30" y="250" width="190" height="120" rx="3"/>
+        <text class="ttl" x="125" y="290" text-anchor="middle" style="fill:var(--mut)">補正記憶</text>
+        <text class="role mono" x="125" y="307" text-anchor="middle">学習層 · 設計（未実装）</text>
+        <text class="file-l" x="125" y="326" text-anchor="middle" style="fill:var(--mut)">位置 → Δ(x,z)</text>
+        <text class="loc" x="125" y="342" text-anchor="middle">保存先 未定</text>
+        <path d="M150 250 L297 150" fill="none" stroke="var(--mut)" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#ar1)"/>
+        <text class="lab" x="205" y="212" text-anchor="middle" style="fill:var(--mut)">狙い補正 / Δ更新</text>
+      </svg>
+    </div>
+    <p class="cap">各ボックス下段が実体ファイル：live=<span class="mono">j0_sweep_adopted/*.json</span>（Mac内蔵）、twin=<span class="mono">fk_scan_motion_based_v2.csv</span>（Mac内蔵＋Unity）、real=<span class="mono">pick_place_ledger_v3.csv</span>（KIOXIA SSD）。アーム本体のコード＝<span class="mono">run_pick_place.py</span>＋<span class="mono">j0_lookup.py</span>。live の生成は <span class="mono">j0_sweep_scan.py</span>（オフライン）。<span class="warn-txt">pose_id</span>（赤）が三系統をつなぐ。絶対パスは全体解説③。 破線の<b>補正記憶</b>（<span class="mono">位置→Δ(x,z)</span>）は新設計（DAY257）の学習層で、現行コードには<b>未実装</b>・保存先未定。</p>
+
+    <h2 class="sec"><span class="n">②</span>実行時データフロー ── 1試行のフローチャート</h2>
+    <div class="figwrap">
+      <svg class="fig" viewBox="0 0 780 710" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="run_pick_place 起動から j0_lookup・送角・実測・分岐・台帳記録・完了までのフローチャート。使用ファイルを各ノードに併記。">
+        <defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#0d0d0d"/></marker></defs>
+
+        <path class="flowedge" d="M290 68 V112"/>
+        <path class="flowedge" d="M290 170 V214"/>
+        <text class="elab r" x="300" y="196">pose_id を返す</text>
+        <path class="flowedge" d="M290 272 V316"/>
+        <path class="flowedge" d="M290 374 V388"/>
+        <path class="flowedge" d="M290 492 V544"/>
+        <text class="elab" x="300" y="520">no</text>
+        <path class="flowedge" d="M290 608 V646"/>
+
+        <path class="flowedge" d="M385 440 H720 V141 H397"/>
+        <text class="elab" x="397" y="433">yes</text>
+        <text class="elab" x="560" y="133" text-anchor="middle">次の stage / phase へ</text>
+
+        <!-- live in -->
+        <polygon class="data" points="23,112 143,112 127,168 7,168"/>
+        <text class="ntext mono" x="78" y="130">live</text>
+        <text class="src" x="74" y="146">j0_sweep_adopted/</text>
+        <text class="src" x="70" y="159">*.json</text>
+        <path class="flowedge" d="M135 141 H185"/>
+        <text class="elab" x="160" y="133" text-anchor="middle">読む</text>
+
+        <!-- real out -->
+        <polygon class="data" points="460,548 620,548 600,606 440,606"/>
+        <text class="ntext mono" x="530" y="570">real</text>
+        <text class="src" x="530" y="587">pick_place_ledger_v3.csv</text>
+        <path class="flowedge" d="M395 576 H448"/>
+        <text class="elab" x="421" y="568" text-anchor="middle">書く</text>
+
+        <!-- N1 -->
+        <rect class="term" x="185" y="24" width="210" height="44" rx="22"/>
+        <text class="ntext" x="290" y="51"><tspan class="mono ntext-b">run_pick_place</tspan> 起動</text>
+
+        <!-- N2 -->
+        <rect class="proc" x="185" y="112" width="210" height="58"/>
+        <text class="ntext" x="290" y="136"><tspan class="mono">j0_lookup</tspan>（phase を渡す）</text>
+        <text class="src" x="290" y="153">j0_lookup.py</text>
+
+        <!-- N3 -->
+        <rect class="proc" x="185" y="214" width="210" height="58"/>
+        <text class="ntext" x="290" y="238">送角 → アーム動作</text>
+        <text class="src" x="290" y="255">run_pick_place.py</text>
+
+        <!-- N4 -->
+        <rect class="proc" x="185" y="316" width="210" height="58"/>
+        <text class="ntext" x="290" y="340">post_actual 取得（実測角）</text>
+        <text class="src" x="290" y="357">run_pick_place.py</text>
+
+        <!-- N5 decision -->
+        <polygon class="dec" points="290,388 385,440 290,492 195,440"/>
+        <text class="ntext" x="290" y="436">次の stage /</text>
+        <text class="ntext" x="290" y="452">phase ?</text>
+
+        <!-- N6 -->
+        <rect class="proc" x="185" y="544" width="210" height="64"/>
+        <text class="ntext" x="290" y="566"><tspan class="mono">_append_ledger</tspan></text>
+        <text class="ntext" x="290" y="584"><tspan class="r">pose_id</tspan>・実測角を記録</text>
+        <text class="src" x="290" y="600">run_pick_place.py</text>
+
+        <!-- N7 -->
+        <rect class="term" x="185" y="646" width="210" height="44" rx="22"/>
+        <text class="ntext" x="290" y="673">完了 / 次試行へ</text>
+
+        <!-- twin detached -->
+        <rect class="twin-note" x="14" y="500" width="168" height="92" rx="3"/>
+        <text class="small" x="98" y="524"><tspan class="mono">twin</tspan>（FKテーブル）</text>
+        <text class="src" x="98" y="541">fk_scan_motion_based_v2.csv</text>
+        <text class="small" x="98" y="560">runtime では読まない</text>
+        <text class="small" x="98" y="577">突合は事後に pose_id で</text>
+      </svg>
+    </div>
+    <div class="legend">
+      <span class="lgnd"><span class="sh term"></span>開始 / 終了</span>
+      <span class="lgnd"><span class="sh"></span>処理</span>
+      <span class="lgnd"><span class="sh dec"></span>分岐</span>
+      <span class="lgnd"><span class="sh data"></span>データ入出力</span>
+      <span class="lgnd"><span style="color:var(--accent);font-weight:700">赤</span>＝pose_id</span>
+    </div>
+    <p class="cap">使用ファイルを各ノードに併記。データ：live=<span class="mono">j0_sweep_adopted/*.json</span>、twin=<span class="mono">fk_scan_motion_based_v2.csv</span>（runtime非参照）、real=<span class="mono">pick_place_ledger_v3.csv</span>。コード：起動〜記録＝<span class="mono">run_pick_place.py</span>、採用JSON選択＝<span class="mono">j0_lookup.py</span>（ともに .../place/place_modules/）。出力先は KIOXIA <span class="mono">runs/</span>（台帳＋run JSON）。未マウント時は冒頭 ABORT。絶対パスは全体解説③。</p>
+
+    <h2 class="sec"><span class="n">②+</span>新設計 ── 補正記憶で狙いを補正するループ <span class="tag dim" style="margin-left:8px; text-transform:none; letter-spacing:0">DAY257 · 設計（未実装）</span></h2>
+    <div class="figwrap">
+      <svg class="fig" viewBox="0 0 640 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ブロック検出→fk_lookupで理想姿勢→補正記憶で狙いを補正して送角→実機tipのズレを測定→しきい値内ならgrip、外れていれば補正記憶を更新して次試行。補正記憶は位置→Δ(x,z)を保持する新設計の学習層で、現行コードには未実装。">
+        <defs><marker id="ar3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#0d0d0d"/></marker></defs>
+
+        <!-- chain edges -->
+        <path d="M300 76 V118" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <path d="M300 172 V214" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <path d="M300 268 V310" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <path d="M300 364 V392" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <path d="M300 512 V556" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <text class="elab" x="310" y="540">no</text>
+
+        <!-- yes -> grip -->
+        <path d="M398 452 H440" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <text class="elab" x="419" y="444" text-anchor="middle">yes</text>
+
+        <!-- loop back -> N2 -->
+        <path d="M400 586 H600 V145 H404" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <text class="elab" x="592" y="360" text-anchor="end">次試行へ</text>
+
+        <!-- memory read -> N3 (dashed) -->
+        <path d="M174 240 H196" fill="none" stroke="#0d0d0d" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar3)"/>
+        <!-- memory write N6 -> memory (dashed) -->
+        <path d="M200 586 H96 V332" fill="none" stroke="#0d0d0d" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar3)"/>
+        <text class="elab" x="108" y="560">記憶に書く</text>
+
+        <!-- N1 -->
+        <rect class="proc" x="200" y="22" width="200" height="54"/>
+        <text class="ntext ntext-b" x="300" y="46">① ブロック検出 (x,z)</text>
+        <text class="small" x="300" y="63">上カメラ</text>
+
+        <!-- N2 -->
+        <rect class="proc" x="200" y="118" width="200" height="54"/>
+        <text class="ntext ntext-b" x="300" y="142"><tspan class="mono">fk_lookup</tspan> 理想姿勢</text>
+        <text class="small" x="300" y="159">(x,z) → 6関節 · 残差±2mm</text>
+
+        <!-- N3 -->
+        <rect class="proc" x="200" y="214" width="200" height="54"/>
+        <text class="ntext" x="300" y="238">狙いを補正 → 送角</text>
+        <text class="small" x="300" y="255">狙い = (x,z) − 記憶Δ</text>
+
+        <!-- N4 -->
+        <rect class="proc" x="200" y="310" width="200" height="54"/>
+        <text class="ntext" x="300" y="334">実機 tip のズレを測る</text>
+        <text class="small" x="300" y="351">Δ(x,z) = 爪先 − ブロック</text>
+
+        <!-- N5 decision -->
+        <polygon class="dec" points="300,392 398,452 300,512 202,452"/>
+        <text class="ntext" x="300" y="448">掴めた / しきい内?</text>
+        <text class="small" x="300" y="465">|Δx|,|Δz| ≤ th ?</text>
+
+        <!-- grip -->
+        <rect class="term" x="440" y="428" width="140" height="48" rx="24"/>
+        <text class="ntext ntext-b" x="510" y="450">grip</text>
+        <text class="small" x="510" y="466">掴む</text>
+
+        <!-- N6 -->
+        <rect class="proc" x="200" y="556" width="200" height="60"/>
+        <text class="ntext" x="300" y="580">補正記憶を更新</text>
+        <text class="small" x="300" y="598">記憶Δ ← 測ったΔ（次試行へ）</text>
+
+        <!-- memory store (dashed = not implemented) -->
+        <rect class="twin-note" x="18" y="210" width="156" height="122" rx="3"/>
+        <text class="ntext ntext-b" x="96" y="246" style="fill:var(--mut)">補正記憶</text>
+        <text class="src" x="96" y="268">位置 → Δ(x,z)</text>
+        <text class="small" x="96" y="298">学習層</text>
+        <text class="small" x="96" y="316">設計・未実装</text>
+      </svg>
+    </div>
+    <p class="cap"><b>これは新設計（DAY257）で、現行コードには未実装。</b> 現行の実装フローは上の②（<span class="mono">j0_lookup</span> → 送角 → 実測 → 台帳）。新設計は <span class="mono">fk_lookup</span> の理想姿勢を土台に、その上へ「実機で測ったズレ Δ を位置ごとに <b>補正記憶</b> へ貯め、次の狙いから差し引く」学習層を載せる。補正記憶（<span class="mono">位置→Δ(x,z)</span>）の保存先・実体ファイルは未定。実装とパスが確定したらこの図と③④に正式反映する。</p>
+
+  </section>
+
+  <!-- ============ TAB B: 全体解説 ============ -->
+  <section class="panel" id="panel-doc" role="tabpanel" aria-labelledby="tab-doc">
+
+    <h2 class="sec"><span class="n">③</span>実体パス一覧 ── 絶対パス・省略なし（実機調査＋コード根拠で確定）</h2>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>系統</th><th>絶対パス</th><th>読む</th><th>書く</th><th>変更</th><th>メモ</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">live</span></td>
+          <td class="path">/Users/shimazueiichi/r2r2r-scripts/dynamic_tracking_limits/logs/j0_sweep/j0_sweep_adopted/</td>
+          <td class="rw">j0_lookup<br>(ADOPTED_DIR.glob)</td>
+          <td class="rw">採用キュレーション<br>(scanから選定配置)</td>
+          <td class="rw">追記</td>
+          <td>採用JSON 5本。pose_id 保有。place_noblock は存在するが lookup 不可（下記）</td>
+        </tr>
+        <tr>
+          <td><span class="tag">live</span></td>
+          <td class="path">/Users/shimazueiichi/r2r2r-scripts/dynamic_tracking_limits/logs/j0_sweep/</td>
+          <td class="rw">（採用元プール）</td>
+          <td class="rw">j0_sweep_scan.py<br>(DEFAULT_OUTPUT_ROOT)</td>
+          <td class="rw">追記</td>
+          <td>raw sweep <span class="mono">j0_sweep_{phase}_{NN}.json</span>＋frames。classified/ に分類。adopted/ はここから選定</td>
+        </tr>
+        <tr class="dim">
+          <td><span class="tag dim">twin</span></td>
+          <td class="path">/Users/shimazueiichi/r2r2r-scripts/fk_scan_motion_based_v2.csv</td>
+          <td class="rw">Unity / planning</td>
+          <td class="rw">Unity FKScanner<br>(生成のみ)</td>
+          <td class="rw lock">変更禁止</td>
+          <td>現行。runtime のアーム制御は読まない（run_pick_place / j0_lookup に FK 参照なし）</td>
+        </tr>
+        <tr class="dim">
+          <td><span class="tag dim">twin</span></td>
+          <td class="path">/Users/shimazueiichi/Robotics_UX/Robotics_UX_New/Assets/Data/fk_scan_motion_based_v2.csv</td>
+          <td class="rw">Unity</td>
+          <td class="rw">Unity FKScanner</td>
+          <td class="rw lock">変更禁止</td>
+          <td>Mac 側と md5 一致必須（二重配置）</td>
+        </tr>
+        <tr class="dim">
+          <td><span class="tag dim">旧twin</span></td>
+          <td class="path">/Users/shimazueiichi/r2r2r-scripts/fk_scan_motion_based.csv<br>（＋ Unity Assets/Data に同名）</td>
+          <td class="rw">（戻り先・温存）</td>
+          <td class="rw">—</td>
+          <td class="rw lock">変更禁止</td>
+          <td>v2 不調時のロールバック先</td>
+        </tr>
+        <tr>
+          <td><span class="tag">real</span></td>
+          <td class="path">/Volumes/KIOXIA/r2r2r-data/runs/pick_place_ledger_v3.csv</td>
+          <td class="rw">（分析・突合）</td>
+          <td class="rw">run_pick_place<br>._append_ledger</td>
+          <td class="rw">追記のみ</td>
+          <td>台帳。LEDGER_CSV_PATH（L139）。完走/中断とも1行。pose_id 記録。<b>KIOXIA専用・未マウントABORT</b></td>
+        </tr>
+        <tr>
+          <td><span class="tag">real</span></td>
+          <td class="path">/Volumes/KIOXIA/r2r2r-data/runs/run_pick_place/{run_stem}/</td>
+          <td class="rw">（事後参照）</td>
+          <td class="rw">run_pick_place<br>(LOG_ROOT, L134)</td>
+          <td class="rw">追記</td>
+          <td>1試行=1フォルダ。run JSON＋frames</td>
+        </tr>
+        <tr class="dim">
+          <td><span class="tag dim">新設計</span></td>
+          <td class="path">（未定・実体ファイル未作成）</td>
+          <td class="rw">③ 狙い補正で読む<br>(設計)</td>
+          <td class="rw">⑥ 結果で Δ 更新<br>(設計)</td>
+          <td class="rw lock">未実装</td>
+          <td>補正記憶 <span class="mono">位置→Δ(x,z)</span>。DAY257 設計（②+ 図）。現行コードに該当処理なし。保存先（KIOXIA 想定）も未定。実装後に確定パスを追記</td>
+        </tr>
+        <tr>
+          <td><span class="tag">code</span></td>
+          <td class="path">/Users/shimazueiichi/r2r2r-scripts/dynamic_tracking_limits/place/place_modules/</td>
+          <td class="rw">—</td>
+          <td class="rw">—</td>
+          <td class="rw">改修済 gem✅</td>
+          <td><span class="mono">run_pick_place.py</span> / <span class="mono">j0_lookup.py</span> / <span class="mono">j0_sweep_scan.py</span> の3本</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p class="subnote"><b>採用JSON（5本・実ファイル名）</b> ── adopted/ 直下：</p>
+    <div class="filelist">
+      ├ approach_pick_NA_20pt_adopted_DAY235_01.json<br>
+      ├ pick_NA_20pt_adopted_DAY235_01.json<br>
+      ├ approach_place_NA_20pt_adopted_DAY235_01.json<br>
+      ├ place_withblock_NA_20pt_adopted_DAY235_01.json<br>
+      └ place_noblock_20pt_adopted_DAY232_01.json　← 存在するが lookup 対象外
+    </div>
+
+    <p class="subnote"><b>コード根拠（誰がどこを読み書きするか＝コードが正）</b>
+      <ul>
+        <li><b>j0_lookup</b>：VALID_PHASES = approach_pick / pick / approach_place / place_withblock / place_noblock。LOOKUP_PHASES から place_noblock を除外（L78）。place_noblock を渡すと <span class="mono">ValueError</span>（L258-262・detect 全失敗で XZ→j0 を持たない）。<b>実質 place = place_withblock</b>。pose_id は _load_arc が返す（L269）。</li>
+        <li><b>run_pick_place</b>：ledger・run JSON とも KIOXIA（LOG_ROOT L134 / LEDGER_CSV_PATH L139）。KIOXIA 未マウントなら run 冒頭で ABORT（L1042-1046）し Mac 内蔵へ書かない。FK テーブルは読まない（L21 は「書き換えない」ガードコメントのみ）。</li>
+        <li><b>j0_sweep_scan</b>：出力先 DEFAULT_OUTPUT_ROOT（L100）＝ <span class="mono">.../dynamic_tracking_limits/logs/j0_sweep/</span>。docstring L28 の <span class="mono">~/r2r2r-scripts/logs/j0_sweep/</span> は省略表記で、実体は dynamic_tracking_limits 配下。adopted/ への配置は別工程。</li>
+      </ul>
+    </p>
+
+    <p class="subnote"><b>twin の構造詳細</b>：列は <span class="mono">ee_x,ee_y,ee_z,j0..j5</span>（ee＝Unity 座標 m・関節＝度）。ee は Unity 内グリッパー先端 Brep の位置で <b>ikpy では再現不可</b>。点追加は Unity FKScanner 再実行のみ。</p>
+
+    <div class="resolved">
+      <h4>
+        <svg class="ico" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+        解決：real は「二重化」していなかった
+      </h4>
+      <p>以前「Mac working v3 と KIOXIA v2 が二重化」と疑っていた件は誤り。<span class="mono">~/r2r2r-scripts/</span> 配下に ledger は <b>0 件</b>（find 確認）。台帳の実体は KIOXIA の <span class="mono">/Volumes/KIOXIA/r2r2r-data/runs/pick_place_ledger_v3.csv</span> 単一で、コード（run_pick_place L139）もここを直書き。KIOXIA 専用・ローカル fallback なし。<b>real は単一ソース・v3</b>で確定。</p>
+    </div>
+
+    <h2 class="sec"><span class="n">④</span>残務 ── 確定後に残るもの</h2>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>論点</th><th>状態</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td>MASTER の台帳パス記述</td><td><span class="ok">済</span></td><td>DAY256 で MASTER を <span class="mono">v3</span> に更新済（保存先テーブル・フォルダ構成・保管ルール2箇所）。過去の更新履歴の v2 表記は当時の事実として保持</td></tr>
+        <tr><td>place_noblock の扱い</td><td><span class="ok">明確化済</span></td><td>ファイルは adopted/ に存在するが j0_lookup が設計上拒否（ValueError）。place = withblock</td></tr>
+        <tr><td>実機のスクリプト構成</td><td><span class="ok">確定</span></td><td><span class="mono">.../place/place_modules/</span> の3本（調査済）</td></tr>
+        <tr><td>pose_id 付与位置の不揃い</td><td>保留</td><td>遡及分＝末尾／自動付与＝phase直後（今回未調査）。機能上は問題なし</td></tr>
+        <tr><td>補正記憶レイヤーの実装</td><td><span class="lock">未着手</span></td><td>DAY257 設計（②+ 図）。<span class="mono">fk_lookup</span> の上に位置→Δ(x,z) を貯めて狙いを補正する学習層。現行コードに該当処理なし。実装が入るまで blueprint 上は破線扱い</td></tr>
+        <tr><td>補正記憶の保存先・実体ファイル</td><td><span class="lock">未定</span></td><td>測定由来データのため KIOXIA 配下を想定。MASTER「データ保管」の種類→場所テーブルに追記してから実装する（場所のルール更新が実装より先）</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+  </section>
+
+  <footer>
+    設計図（規格自由・自分用・常用リファレンス）。イメージ図＝図解優先、全体解説＝絶対パスと根拠。モノクロ統一、赤系は pose_id・要更新・未実装フラグのみ。データ増加で変わる数値は載せない。<br>
+    パス確定: 実機 find ＋ run_pick_place / j0_lookup / j0_sweep_scan のソース grep（2026-06-26 調査）。<br>
+    補正記憶層（DAY257 新設計）は破線で併記＝<b>未実装・コード未確認</b>。実装と保存先が確定したら ① ②+ ③ ④ を正式版へ更新する。
+  </footer>
+</div>
+
+<script>
+  (function(){
+    var panels = {img: document.getElementById('panel-img'), doc: document.getElementById('panel-doc')};
+    function select(id){
+      document.querySelectorAll('.tab').forEach(function(t){ t.setAttribute('aria-selected', t.id === 'tab-'+id ? 'true':'false'); });
+      panels.img.classList.toggle('active', id === 'img');
+      panels.doc.classList.toggle('active', id === 'doc');
+    }
+    document.getElementById('tab-img').addEventListener('click', function(){ select('img'); });
+    document.getElementById('tab-doc').addEventListener('click', function(){ select('doc'); });
+  })();
+</script>
+</body>
+</html>
