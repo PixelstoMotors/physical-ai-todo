@@ -116,7 +116,8 @@
   <header>
     <div class="kicker">mechArm 270 Pi · データアーキテクチャ リファレンス</div>
     <h1>mechArm に使っているデータの全体図</h1>
-    <p class="sub">live（入力）／ twin（変換器）／ real（出力）の3系統と、それを束ねる pose_id。「イメージ図」で関係を絵で掴み、「全体解説」で絶対パスと根拠を確認する。件数・行数などデータ増加で変わる数値は載せない。パスは実機調査とコード根拠で確定（省略なし）。 DAY257 の新設計＝<b>補正記憶</b>（実機で測ったズレを位置ごとに貯め、次の狙いを補正する学習層）も破線で併記。これは現行コードには<b>未実装・コード未確認</b>。</p>
+    <p class="sub">小型ロボットアーム mechArm 270 Pi を「iPhone と Unity だけで物を掴ませる」公開プロジェクト Pixels to Motors で、実機がどんなデータを読み書きしているかの全体図。入力（採用した姿勢）→ アーム → 出力（試行の記録）という流れに、最近足した <b>補正記憶</b>（実機で測ったズレを位置ごとに覚えて、次の狙いを自動で直す仕組み）が加わっている。「イメージ図」で関係を絵で掴み、「全体解説」で実際のファイルの場所と根拠を確認する。</p>
+    <p class="sub" style="margin-top:8px; font-size:11.5px; border-left:2px solid var(--line); padding-left:11px">読み方・用語：<b>DAYxxx</b>（下のファイル名などに出る）＝毎日公開している開発ログの通し番号（例：DAY235＝開発235日目）。<b>live</b>＝入力データ、<b>twin</b>＝座標と関節角度を対応づける変換テーブル、<b>real</b>＝実行結果の記録。<b>pose_id</b>＝同じ姿勢を3系統（live/twin/real）で突き合わせる共通ID。<b>approach</b>＝ブロックの手前上空へ行く中間動作、<b>descend</b>＝そこから降りて掴む動作。<b>EMA</b>＝指数移動平均（新しい測定を少しずつ混ぜて更新していく平均）。<b>KIOXIA</b>＝測定データを置いている外付け SSD。件数・行数などデータ増加で変わる数値は載せない。パスは実機とコードで確認済み。</p>
   </header>
 
   <div class="tabs" role="tablist">
@@ -135,67 +136,64 @@
 
     <h2 class="sec"><span class="n">①</span>三系統アーキテクチャ ── live / twin / real</h2>
     <div class="figwrap">
-      <svg class="fig" viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="live(j0_sweep_adopted/*.json) を読み real(pick_place_ledger_v3.csv) に書く。twin(fk_scan_motion_based_v2.csv) は読まれない予測器。pose_id が三系統をつなぐ。補正記憶（位置→Δ(x,z)）は新設計の学習層で未実装。">
+      <svg class="fig" viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三系統 live(入力・j0_sweep_adopted/*.json)・twin(変換テーブル・fk_scan_motion_based_v2.csv)・real(出力・pick_place_ledger_v3.csv)を同じ階層で並べ、中央上の run_pick_place がつなぐ。live→run→real と twin→run の流れ。pose_id は赤の破線で3系統だけを突合する join key。補正記憶は二次の学習層サイドノート。">
         <defs><marker id="ar1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#0d0d0d"/></marker></defs>
 
-        <path class="edge" d="M220 117 H291"/>
-        <text class="lab" x="256" y="109" text-anchor="middle">読む</text>
-        <path class="edge" d="M489 117 H560"/>
-        <text class="lab" x="524" y="109" text-anchor="middle">書く</text>
+        <!-- run_pick_place : central process node (light, not black) -->
+        <rect x="300" y="28" width="180" height="80" fill="var(--card)" stroke="var(--ink)" stroke-width="2.5"/>
+        <g class="ico-svg" transform="translate(378,40)"><rect x="3" y="22" width="14" height="3"/><path d="M10 22V14"/><path d="M10 14L19 7"/><path d="M19 7l-2 -3M19 7l3 -1"/></g>
+        <text class="ttl" x="390" y="84" text-anchor="middle">run_pick_place</text>
+        <text class="role mono" x="390" y="99" text-anchor="middle">アーム本体・処理</text>
 
-        <!-- LIVE -->
-        <rect class="box" x="30" y="52" width="190" height="130"/>
-        <g class="ico-svg" transform="translate(117,66)"><path d="M0 0h9l4 4v12H0z"/><path d="M9 0v4h4"/><path d="M3 9h7M3 12h7"/></g>
-        <text class="ttl" x="125" y="104" text-anchor="middle">採用姿勢</text>
-        <text class="role mono" x="125" y="121" text-anchor="middle">live · 入力 · 読む</text>
-        <text class="file-l" x="125" y="139" text-anchor="middle">j0_sweep_adopted/*.json</text>
-        <text class="loc" x="125" y="154" text-anchor="middle">Mac 内蔵 / scripts</text>
+        <!-- three systems row (same hierarchy) -->
+        <rect class="box" x="40" y="170" width="200" height="112"/>
+        <g class="ico-svg" transform="translate(58,184)"><path d="M0 0h9l4 4v12H0z"/><path d="M9 0v4h4"/><path d="M3 9h7M3 12h7"/></g>
+        <text class="ttl" x="140" y="214" text-anchor="middle">live</text>
+        <text class="role mono" x="140" y="232" text-anchor="middle">入力</text>
+        <text class="file-l" x="140" y="254" text-anchor="middle">j0_sweep_adopted/*.json</text>
 
-        <!-- ARM (actor: 黒ベースでデータ類と区別) -->
-        <rect class="actor" x="295" y="47" width="190" height="140"/>
-        <g class="ico-w" transform="translate(378,62)"><rect x="3" y="22" width="14" height="3"/><path d="M10 22V14"/><path d="M10 14L19 7"/><path d="M19 7l-2 -3M19 7l3 -1"/></g>
-        <text class="ttl-w mono" x="390" y="103" text-anchor="middle">run_pick_place</text>
-        <text class="role-w" x="390" y="120" text-anchor="middle">アーム本体</text>
-        <text class="file-w" x="390" y="139" text-anchor="middle">run_pick_place.py / j0_lookup.py</text>
+        <rect class="box" x="290" y="170" width="200" height="112"/>
+        <g class="ico-svg" transform="translate(308,184)"><rect x="4" y="4" width="14" height="14" rx="2"/><path d="M-2 11h6M18 11h6"/></g>
+        <text class="ttl" x="390" y="214" text-anchor="middle">twin</text>
+        <text class="role mono" x="390" y="232" text-anchor="middle">変換テーブル</text>
+        <text class="file-l" x="390" y="254" text-anchor="middle">fk_scan_motion_based_v2.csv</text>
 
-        <!-- REAL -->
-        <rect class="box" x="560" y="52" width="190" height="130"/>
-        <g class="ico-svg" transform="translate(647,66)"><path d="M0 16l3 -.6 9.5 -9.5L9.4 2.4 0 12z"/><path d="M8 4l3.5 3.5"/></g>
-        <text class="ttl" x="655" y="104" text-anchor="middle">試行台帳・run記録</text>
-        <text class="role mono" x="655" y="121" text-anchor="middle">real · 出力 · 書く</text>
-        <text class="file-l" x="655" y="139" text-anchor="middle">pick_place_ledger_v3.csv</text>
-        <text class="loc" x="655" y="154" text-anchor="middle">KIOXIA SSD</text>
+        <rect class="box" x="540" y="170" width="200" height="112"/>
+        <g class="ico-svg" transform="translate(558,184)"><path d="M0 16l3 -.6 9.5 -9.5L9.4 2.4 0 12z"/><path d="M8 4l3.5 3.5"/></g>
+        <text class="ttl" x="640" y="214" text-anchor="middle">real</text>
+        <text class="role mono" x="640" y="232" text-anchor="middle">出力</text>
+        <text class="file-l" x="640" y="254" text-anchor="middle">pick_place_ledger_v3.csv</text>
 
-        <!-- TWIN -->
-        <rect class="box dim" x="295" y="250" width="190" height="120"/>
-        <g class="ico-svg" transform="translate(379,260)"><rect x="4" y="4" width="14" height="14" rx="2"/><path d="M-2 11h6M18 11h6"/></g>
-        <text class="ttl" x="390" y="296" text-anchor="middle">FKテーブル</text>
-        <text class="role mono" x="390" y="313" text-anchor="middle">twin · 変換器 · 読まない</text>
-        <text class="file-l" x="390" y="331" text-anchor="middle">fk_scan_motion_based_v2.csv</text>
-        <text class="loc" x="390" y="346" text-anchor="middle">Mac 内蔵 ＋ Unity</text>
+        <!-- data-flow arrows (black) -->
+        <path d="M150 170 L332 110" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#ar1)"/>
+        <text class="lab" x="196" y="140" text-anchor="middle">読む</text>
+        <path d="M390 170 V110" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#ar1)"/>
+        <text class="lab" x="400" y="150" text-anchor="start">descendで読む</text>
+        <path d="M448 110 L640 170" fill="none" stroke="var(--ink)" stroke-width="1.5" marker-end="url(#ar1)"/>
+        <text class="lab" x="588" y="140" text-anchor="middle">書く</text>
 
-        <!-- pose_id hub -->
-        <path class="pedge" d="M360 210 L127 182"/>
-        <path class="pedge" d="M420 210 L653 182"/>
-        <path class="pedge" d="M390 221 V250"/>
-        <circle class="pdot" cx="127" cy="182" r="3"/>
-        <circle class="pdot" cx="653" cy="182" r="3"/>
-        <circle class="pdot" cx="390" cy="250" r="3"/>
-        <rect class="pchip" x="350" y="199" width="80" height="22" rx="4"/>
-        <g class="ico-w" transform="translate(357,204)"><circle cx="4" cy="4.5" r="3"/><path d="M6.3 6.2L12 12M9.8 9.8l1.4 -1.4M11.2 11.2l1.4 -1.4"/></g>
-        <text class="pchip-t" x="374" y="214">pose_id</text>
+        <!-- pose_id : join key (red dashed, no arrowheads, live/twin/real only) -->
+        <path d="M140 312 H640" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <path d="M140 282 V312" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <path d="M390 282 V312" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <path d="M640 282 V312" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <rect class="pchip" x="356" y="302" width="68" height="20" rx="4"/>
+        <g class="ico-w" transform="translate(363,307)"><circle cx="4" cy="4.5" r="3"/><path d="M6.3 6.2L12 12M9.8 9.8l1.4 -1.4M11.2 11.2l1.4 -1.4"/></g>
+        <text class="pchip-t" x="380" y="316">pose_id</text>
+        <text class="lab" x="390" y="340" text-anchor="middle" style="fill:var(--accent)">3系統を突合する join key</text>
 
-        <!-- correction memory (new design / not implemented) -->
-        <rect class="twin-note" x="30" y="250" width="190" height="120" rx="3"/>
-        <text class="ttl" x="125" y="290" text-anchor="middle" style="fill:var(--mut)">補正記憶</text>
-        <text class="role mono" x="125" y="307" text-anchor="middle">学習層 · 設計（未実装）</text>
-        <text class="file-l" x="125" y="326" text-anchor="middle" style="fill:var(--mut)">位置 → Δ(x,z)</text>
-        <text class="loc" x="125" y="342" text-anchor="middle">保存先 未定</text>
-        <path d="M150 250 L297 150" fill="none" stroke="var(--mut)" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#ar1)"/>
-        <text class="lab" x="205" y="212" text-anchor="middle" style="fill:var(--mut)">狙い補正 / Δ更新</text>
+        <!-- 補正記憶 : secondary side-note (dashed, light, small) -->
+        <rect class="twin-note" x="40" y="30" width="170" height="74" rx="3"/>
+        <text class="role mono" x="125" y="52" text-anchor="middle" style="fill:var(--mut)">補正記憶（二次・学習層）</text>
+        <text class="file-l" x="125" y="70" text-anchor="middle" style="fill:var(--mut)">block − Δ / EMA</text>
+        <text class="loc" x="125" y="88" text-anchor="middle">KIOXIA · 詳細は ②+ / ③</text>
+        <path d="M210 50 H298" fill="none" stroke="var(--mut)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ar1)"/>
+        <text x="254" y="44" text-anchor="middle" style="font-size:8.5px; fill:var(--mut)">lookup前に読む</text>
+        <path d="M298 86 H212" fill="none" stroke="var(--mut)" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ar1)"/>
+        <text x="254" y="99" text-anchor="middle" style="font-size:8.5px; fill:var(--mut)">EMA更新</text>
       </svg>
     </div>
-    <p class="cap">各ボックス下段が実体ファイル：live=<span class="mono">j0_sweep_adopted/*.json</span>（Mac内蔵）、twin=<span class="mono">fk_scan_motion_based_v2.csv</span>（Mac内蔵＋Unity）、real=<span class="mono">pick_place_ledger_v3.csv</span>（KIOXIA SSD）。アーム本体のコード＝<span class="mono">run_pick_place.py</span>＋<span class="mono">j0_lookup.py</span>。live の生成は <span class="mono">j0_sweep_scan.py</span>（オフライン）。<span class="warn-txt">pose_id</span>（赤）が三系統をつなぐ。絶対パスは全体解説③。 破線の<b>補正記憶</b>（<span class="mono">位置→Δ(x,z)</span>）は新設計（DAY257）の学習層で、現行コードには<b>未実装</b>・保存先未定。</p>
+    <p class="cap"><b>live</b>＝採用JSON（入力）、<b>twin</b>＝descend 時に読む FK テーブル、<b>real</b>＝KIOXIA の試行台帳（出力）。中央の <span class="mono">run_pick_place</span> が3つをつなぐ処理。<span class="warn-txt">pose_id</span>（赤の破線）は3系統を突合する join key。<b>補正記憶</b>は二次の学習層で、詳細は ②+ と③。絶対パスは③。</p>
 
     <h2 class="sec"><span class="n">②</span>実行時データフロー ── 1試行のフローチャート</h2>
     <div class="figwrap">
@@ -236,8 +234,9 @@
 
         <!-- N2 -->
         <rect class="proc" x="185" y="112" width="210" height="58"/>
-        <text class="ntext" x="290" y="136"><tspan class="mono">j0_lookup</tspan>（phase を渡す）</text>
-        <text class="src" x="290" y="153">j0_lookup.py</text>
+        <text class="ntext" x="290" y="132">lookup（approach=<tspan class="mono">j0</tspan> / descend=<tspan class="mono">fk</tspan>）</text>
+        <text class="src" x="290" y="148">j0_lookup.py / fk_lookup.py</text>
+        <text class="src" x="290" y="161">前に補正記憶を読む（block−Δ）</text>
 
         <!-- N3 -->
         <rect class="proc" x="185" y="214" width="210" height="58"/>
@@ -264,12 +263,12 @@
         <rect class="term" x="185" y="646" width="210" height="44" rx="22"/>
         <text class="ntext" x="290" y="673">完了 / 次試行へ</text>
 
-        <!-- twin detached -->
-        <rect class="twin-note" x="14" y="500" width="168" height="92" rx="3"/>
-        <text class="small" x="98" y="524"><tspan class="mono">twin</tspan>（FKテーブル）</text>
-        <text class="src" x="98" y="541">fk_scan_motion_based_v2.csv</text>
-        <text class="small" x="98" y="560">runtime では読まない</text>
-        <text class="small" x="98" y="577">突合は事後に pose_id で</text>
+        <!-- twin: now read in descend -->
+        <rect class="box" x="14" y="500" width="168" height="96" rx="3"/>
+        <text class="small" x="98" y="523"><tspan class="mono">twin</tspan>（FKテーブル）</text>
+        <text class="src" x="98" y="540">fk_scan_motion_based_v2.csv</text>
+        <text class="small" x="98" y="559">descend(pick)で fk_lookup が読む</text>
+        <text class="small" x="98" y="577">approach は live(j0_lookup)</text>
       </svg>
     </div>
     <div class="legend">
@@ -279,79 +278,65 @@
       <span class="lgnd"><span class="sh data"></span>データ入出力</span>
       <span class="lgnd"><span style="color:var(--accent);font-weight:700">赤</span>＝pose_id</span>
     </div>
-    <p class="cap">使用ファイルを各ノードに併記。データ：live=<span class="mono">j0_sweep_adopted/*.json</span>、twin=<span class="mono">fk_scan_motion_based_v2.csv</span>（runtime非参照）、real=<span class="mono">pick_place_ledger_v3.csv</span>。コード：起動〜記録＝<span class="mono">run_pick_place.py</span>、採用JSON選択＝<span class="mono">j0_lookup.py</span>（ともに .../place/place_modules/）。出力先は KIOXIA <span class="mono">runs/</span>（台帳＋run JSON）。未マウント時は冒頭 ABORT。絶対パスは全体解説③。</p>
+    <p class="cap">使用ファイルを各ノードに併記。データ：live=<span class="mono">j0_sweep_adopted/*.json</span>、twin=<span class="mono">fk_scan_motion_based_v2.csv</span>（descend で fk_lookup が読む）、real=<span class="mono">pick_place_ledger_v3.csv</span>。コード：起動〜記録＝<span class="mono">run_pick_place.py</span>、採用JSON選択＝<span class="mono">j0_lookup.py</span>（ともに .../place/place_modules/）。出力先は KIOXIA <span class="mono">runs/</span>（台帳＋run JSON）。未マウント時は冒頭 ABORT。絶対パスは全体解説③。 descend は <span class="mono">fk_lookup</span>＋補正記憶。位置ごとの補正ループは下の ②+。</p>
 
-    <h2 class="sec"><span class="n">②+</span>新設計 ── 補正記憶で狙いを補正するループ <span class="tag dim" style="margin-left:8px; text-transform:none; letter-spacing:0">DAY257 · 設計（未実装）</span></h2>
+    <h2 class="sec"><span class="n">②+</span>実装済みの追従ループ ── 補正記憶 × fk_lookup <span class="tag" style="margin-left:8px; text-transform:none; letter-spacing:0">実装済み</span></h2>
     <div class="figwrap">
-      <svg class="fig" viewBox="0 0 640 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ブロック検出→fk_lookupで理想姿勢→補正記憶で狙いを補正して送角→実機tipのズレを測定→しきい値内ならgrip、外れていれば補正記憶を更新して次試行。補正記憶は位置→Δ(x,z)を保持する新設計の学習層で、現行コードには未実装。">
+      <svg class="fig" viewBox="0 0 640 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ブロック検出→補正記憶を読んで狙いをblock−Δに補正→lookup（descendはfk_lookupで6関節、approachはj0_lookup）→送角→実機tipのズレΔを測定→補正記憶をEMA更新→grip/次試行。補正記憶は位置→Δ(x,z)をKIOXIAに持つ実装済みの学習層。">
         <defs><marker id="ar3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#0d0d0d"/></marker></defs>
 
-        <!-- chain edges -->
-        <path d="M300 76 V118" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
-        <path d="M300 172 V214" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
-        <path d="M300 268 V310" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
-        <path d="M300 364 V392" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
-        <path d="M300 512 V556" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
-        <text class="elab" x="310" y="540">no</text>
+        <path d="M300 78 V116" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <path d="M300 178 V214" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <path d="M300 282 V318" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <path d="M300 378 V414" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <path d="M300 474 V510" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <path d="M300 580 V616" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
 
-        <!-- yes -> grip -->
-        <path d="M398 452 H440" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
-        <text class="elab" x="419" y="444" text-anchor="middle">yes</text>
+        <path d="M400 638 H600 V147 H404" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <text class="elab" x="592" y="380" text-anchor="end">次試行（記憶を読む）</text>
 
-        <!-- loop back -> N2 -->
-        <path d="M400 586 H600 V145 H404" fill="none" stroke="#0d0d0d" stroke-width="1.5" marker-end="url(#ar3)"/>
-        <text class="elab" x="592" y="360" text-anchor="end">次試行へ</text>
+        <path d="M178 250 L200 160" fill="none" stroke="#0d0d0d" stroke-width="1.4" marker-end="url(#ar3)"/>
+        <path d="M200 545 H98 V332" fill="none" stroke="#0d0d0d" stroke-width="1.4" marker-end="url(#ar3)"/>
+        <text class="elab" x="108" y="520">EMA更新</text>
 
-        <!-- memory read -> N3 (dashed) -->
-        <path d="M174 240 H196" fill="none" stroke="#0d0d0d" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar3)"/>
-        <!-- memory write N6 -> memory (dashed) -->
-        <path d="M200 586 H96 V332" fill="none" stroke="#0d0d0d" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar3)"/>
-        <text class="elab" x="108" y="560">記憶に書く</text>
+        <rect class="proc" x="200" y="24" width="200" height="54"/>
+        <text class="ntext ntext-b" x="300" y="48">① ブロック検出 (x,z)</text>
+        <text class="small" x="300" y="65">上カメラ</text>
 
-        <!-- N1 -->
-        <rect class="proc" x="200" y="22" width="200" height="54"/>
-        <text class="ntext ntext-b" x="300" y="46">① ブロック検出 (x,z)</text>
-        <text class="small" x="300" y="63">上カメラ</text>
+        <rect class="proc" x="200" y="116" width="200" height="62"/>
+        <text class="ntext" x="300" y="140">補正記憶を読む</text>
+        <text class="small" x="300" y="157">狙い = block − Δ</text>
+        <text class="small" x="300" y="171"><tspan class="mono">_apply_correction</tspan></text>
 
-        <!-- N2 -->
-        <rect class="proc" x="200" y="118" width="200" height="54"/>
-        <text class="ntext ntext-b" x="300" y="142"><tspan class="mono">fk_lookup</tspan> 理想姿勢</text>
-        <text class="small" x="300" y="159">(x,z) → 6関節 · 残差±2mm</text>
+        <rect class="proc" x="200" y="214" width="200" height="68"/>
+        <text class="ntext" x="300" y="236">lookup → 6関節</text>
+        <text class="small" x="300" y="253">descend=<tspan class="mono">fk_lookup</tspan>（j1≤88°）</text>
+        <text class="small" x="300" y="270">approach=<tspan class="mono">j0_lookup</tspan></text>
 
-        <!-- N3 -->
-        <rect class="proc" x="200" y="214" width="200" height="54"/>
-        <text class="ntext" x="300" y="238">狙いを補正 → 送角</text>
-        <text class="small" x="300" y="255">狙い = (x,z) − 記憶Δ</text>
+        <rect class="proc" x="200" y="318" width="200" height="60"/>
+        <text class="ntext" x="300" y="342">送角 → アーム動作</text>
+        <text class="small" x="300" y="360"><tspan class="mono">send_angles</tspan></text>
 
-        <!-- N4 -->
-        <rect class="proc" x="200" y="310" width="200" height="54"/>
-        <text class="ntext" x="300" y="334">実機 tip のズレを測る</text>
-        <text class="small" x="300" y="351">Δ(x,z) = 爪先 − ブロック</text>
+        <rect class="proc" x="200" y="414" width="200" height="60"/>
+        <text class="ntext" x="300" y="438">実機 tip のズレを測る</text>
+        <text class="small" x="300" y="456">Δ(x,z) = 爪先 − ブロック</text>
 
-        <!-- N5 decision -->
-        <polygon class="dec" points="300,392 398,452 300,512 202,452"/>
-        <text class="ntext" x="300" y="448">掴めた / しきい内?</text>
-        <text class="small" x="300" y="465">|Δx|,|Δz| ≤ th ?</text>
+        <rect class="proc" x="200" y="510" width="200" height="70"/>
+        <text class="ntext" x="300" y="534">補正記憶を更新</text>
+        <text class="small" x="300" y="552">記憶Δ ← EMA(0.5)</text>
+        <text class="small" x="300" y="568">20mm 格子セルごと</text>
 
-        <!-- grip -->
-        <rect class="term" x="440" y="428" width="140" height="48" rx="24"/>
-        <text class="ntext ntext-b" x="510" y="450">grip</text>
-        <text class="small" x="510" y="466">掴む</text>
+        <rect class="term" x="200" y="616" width="200" height="46" rx="23"/>
+        <text class="ntext" x="300" y="643">grip ／ 次試行へ</text>
 
-        <!-- N6 -->
-        <rect class="proc" x="200" y="556" width="200" height="60"/>
-        <text class="ntext" x="300" y="580">補正記憶を更新</text>
-        <text class="small" x="300" y="598">記憶Δ ← 測ったΔ（次試行へ）</text>
-
-        <!-- memory store (dashed = not implemented) -->
-        <rect class="twin-note" x="18" y="210" width="156" height="122" rx="3"/>
-        <text class="ntext ntext-b" x="96" y="246" style="fill:var(--mut)">補正記憶</text>
-        <text class="src" x="96" y="268">位置 → Δ(x,z)</text>
-        <text class="small" x="96" y="298">学習層</text>
-        <text class="small" x="96" y="316">設計・未実装</text>
+        <rect class="box" x="18" y="208" width="160" height="124" rx="3"/>
+        <text class="ntext ntext-b" x="98" y="240">補正記憶</text>
+        <text class="src" x="98" y="262">位置 → Δ(x,z)</text>
+        <text class="small" x="98" y="290">20mm格子 · KIOXIA</text>
+        <text class="small" x="98" y="308">実装済み</text>
       </svg>
     </div>
-    <p class="cap"><b>これは新設計（DAY257）で、現行コードには未実装。</b> 現行の実装フローは上の②（<span class="mono">j0_lookup</span> → 送角 → 実測 → 台帳）。新設計は <span class="mono">fk_lookup</span> の理想姿勢を土台に、その上へ「実機で測ったズレ Δ を位置ごとに <b>補正記憶</b> へ貯め、次の狙いから差し引く」学習層を載せる。補正記憶（<span class="mono">位置→Δ(x,z)</span>）の保存先・実体ファイルは未定。実装とパスが確定したらこの図と③④に正式反映する。</p>
+    <p class="cap"><b>設計どまりではなく、実機に実装して動いている。</b> 検出位置をいったん <b>補正記憶</b>（位置→Δ(x,z)・KIOXIA）で <span class="mono">block − Δ</span>（検出位置から記憶したズレを引く）に補正してから lookup へ渡す。descend（降りて掴む動き）は <span class="mono">fk_lookup</span> が変換テーブルから 6 関節すべてを引く（j1 が一定角を超えるとアームが命令を黙って無視するため、<span class="mono">j1≤88°</span> の範囲に絞る）。approach（手前上空への中間動作）は従来どおり。実測した爪先のズレ Δ を EMA（少しずつ混ぜる平均）で記憶へ書き戻し、次試行で読む。<b>X 方向だけ効いていた補正が、6関節で引くようにしたことで Z（奥行き）方向にも効くようになった</b>（爪先の奥行きズレが 25mm 級から 10mm 級へ）。残るのは保持（grip/hold）── 位置は合うが j4 抜け・握り緩みで落とすことがある（④参照）。</p>
 
   </section>
 
@@ -379,13 +364,13 @@
           <td class="rw">追記</td>
           <td>raw sweep <span class="mono">j0_sweep_{phase}_{NN}.json</span>＋frames。classified/ に分類。adopted/ はここから選定</td>
         </tr>
-        <tr class="dim">
-          <td><span class="tag dim">twin</span></td>
+        <tr>
+          <td><span class="tag">twin</span></td>
           <td class="path">/Users/shimazueiichi/r2r2r-scripts/fk_scan_motion_based_v2.csv</td>
-          <td class="rw">Unity / planning</td>
+          <td class="rw">fk_lookup(descend)<br>Unity / planning</td>
           <td class="rw">Unity FKScanner<br>(生成のみ)</td>
           <td class="rw lock">変更禁止</td>
-          <td>現行。runtime のアーム制御は読まない（run_pick_place / j0_lookup に FK 参照なし）</td>
+          <td>現行。descend(pick)で <span class="mono">fk_lookup</span> が実行時に読む（j1≤88°）。approach は j0_lookup。点追加は Unity 再スキャンのみ</td>
         </tr>
         <tr class="dim">
           <td><span class="tag dim">twin</span></td>
@@ -409,31 +394,31 @@
           <td class="rw">（分析・突合）</td>
           <td class="rw">run_pick_place<br>._append_ledger</td>
           <td class="rw">追記のみ</td>
-          <td>台帳。LEDGER_CSV_PATH（L139）。完走/中断とも1行。pose_id 記録。<b>KIOXIA専用・未マウントABORT</b></td>
+          <td>台帳。LEDGER_CSV_PATH（L147）。try/finally 到達後の完走/中断は1行追記（KIOXIA 未マウントや daemon 失敗の早期 abort は追記されない）。pose_id 記録。<b>KIOXIA専用</b></td>
         </tr>
         <tr>
           <td><span class="tag">real</span></td>
           <td class="path">/Volumes/KIOXIA/r2r2r-data/runs/run_pick_place/{run_stem}/</td>
           <td class="rw">（事後参照）</td>
-          <td class="rw">run_pick_place<br>(LOG_ROOT, L134)</td>
+          <td class="rw">run_pick_place<br>(LOG_ROOT, L142)</td>
           <td class="rw">追記</td>
           <td>1試行=1フォルダ。run JSON＋frames</td>
         </tr>
-        <tr class="dim">
-          <td><span class="tag dim">新設計</span></td>
-          <td class="path">（未定・実体ファイル未作成）</td>
-          <td class="rw">③ 狙い補正で読む<br>(設計)</td>
-          <td class="rw">⑥ 結果で Δ 更新<br>(設計)</td>
-          <td class="rw lock">未実装</td>
-          <td>補正記憶 <span class="mono">位置→Δ(x,z)</span>。DAY257 設計（②+ 図）。現行コードに該当処理なし。保存先（KIOXIA 想定）も未定。実装後に確定パスを追記</td>
+        <tr>
+          <td><span class="tag">補正記憶</span></td>
+          <td class="path">/Volumes/KIOXIA/r2r2r-data/diag/correction_memory.json</td>
+          <td class="rw">_apply_correction<br>(lookup 前)</td>
+          <td class="rw">EMA 更新<br>(実測 Δ 後)</td>
+          <td class="rw">読み書き</td>
+          <td>位置→Δ(x,z)。20mm格子・EMA係数0.5。<b>実装済み（実機で稼働）</b>。<span class="mono">_ensure_ssd_mounted()</span> ガードで未マウント時は適用・保存をスキップ（<span class="mono">_corr_load</span> 自体にガードはない）</td>
         </tr>
         <tr>
           <td><span class="tag">code</span></td>
           <td class="path">/Users/shimazueiichi/r2r2r-scripts/dynamic_tracking_limits/place/place_modules/</td>
           <td class="rw">—</td>
           <td class="rw">—</td>
-          <td class="rw">改修済 gem✅</td>
-          <td><span class="mono">run_pick_place.py</span> / <span class="mono">j0_lookup.py</span> / <span class="mono">j0_sweep_scan.py</span> の3本</td>
+          <td class="rw">外部レビュー済✅</td>
+          <td><span class="mono">run_pick_place.py</span> / <span class="mono">j0_lookup.py</span> / <span class="mono">fk_lookup.py</span> / <span class="mono">j0_sweep_scan.py</span>。descend の fk_lookup は <span class="mono">J1_SAFE_MAX=88.0</span>・<span class="mono">FK_LOOKUP_PHASES=("pick",)</span></td>
         </tr>
       </tbody>
     </table>
@@ -451,19 +436,20 @@
     <p class="subnote"><b>コード根拠（誰がどこを読み書きするか＝コードが正）</b>
       <ul>
         <li><b>j0_lookup</b>：VALID_PHASES = approach_pick / pick / approach_place / place_withblock / place_noblock。LOOKUP_PHASES から place_noblock を除外（L78）。place_noblock を渡すと <span class="mono">ValueError</span>（L258-262・detect 全失敗で XZ→j0 を持たない）。<b>実質 place = place_withblock</b>。pose_id は _load_arc が返す（L269）。</li>
-        <li><b>run_pick_place</b>：ledger・run JSON とも KIOXIA（LOG_ROOT L134 / LEDGER_CSV_PATH L139）。KIOXIA 未マウントなら run 冒頭で ABORT（L1042-1046）し Mac 内蔵へ書かない。FK テーブルは読まない（L21 は「書き換えない」ガードコメントのみ）。</li>
+        <li><b>run_pick_place</b>：ledger・run JSON とも KIOXIA（LOG_ROOT L142 / LEDGER_CSV_PATH L147）。KIOXIA 未マウントなら run 冒頭で ABORT（L1272-1275）し Mac 内蔵へ書かない（この早期 abort は台帳に追記されない）。descend(pick)は <span class="mono">fk_lookup</span> が FK テーブルを実行時に読む（旧記述「FK テーブルは読まない」は撤回）。</li>
+        <li><b>fk_lookup</b>：<span class="mono">FK_LOOKUP_PHASES=("pick",)</span> で descend のみ適用、approach は j0_lookup のまま。<span class="mono">_load_fk_table</span> がテーブル読込時に hard limit ＋ <span class="mono">J1_SAFE_MAX=88.0</span> で絞る（j1>88° はアームが命令を黙って無視する（silent reject）ため候補から除外）。補正は <span class="mono">_apply_correction</span> が <span class="mono">block−Δ</span> を返し、その target を fk_lookup に渡す（補正の渡し方は j0_lookup 時代と同じ・受け手の自由度だけ 1軸→6関節に増えた）。</li>
         <li><b>j0_sweep_scan</b>：出力先 DEFAULT_OUTPUT_ROOT（L100）＝ <span class="mono">.../dynamic_tracking_limits/logs/j0_sweep/</span>。docstring L28 の <span class="mono">~/r2r2r-scripts/logs/j0_sweep/</span> は省略表記で、実体は dynamic_tracking_limits 配下。adopted/ への配置は別工程。</li>
       </ul>
     </p>
 
-    <p class="subnote"><b>twin の構造詳細</b>：列は <span class="mono">ee_x,ee_y,ee_z,j0..j5</span>（ee＝Unity 座標 m・関節＝度）。ee は Unity 内グリッパー先端 Brep の位置で <b>ikpy では再現不可</b>。点追加は Unity FKScanner 再実行のみ。</p>
+    <p class="subnote"><b>twin の構造詳細</b>：列は <span class="mono">ee_x,ee_y,ee_z,j0..j5</span>（ee＝Unity 座標 m・関節＝度）。ee は Unity 内のグリッパー先端形状（Brep）の位置で、<b>一般の運動学計算（ikpy ライブラリ等）では再現できない</b>。点の追加は Unity の FKScanner を再実行するしかない。</p>
 
     <div class="resolved">
       <h4>
         <svg class="ico" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
         解決：real は「二重化」していなかった
       </h4>
-      <p>以前「Mac working v3 と KIOXIA v2 が二重化」と疑っていた件は誤り。<span class="mono">~/r2r2r-scripts/</span> 配下に ledger は <b>0 件</b>（find 確認）。台帳の実体は KIOXIA の <span class="mono">/Volumes/KIOXIA/r2r2r-data/runs/pick_place_ledger_v3.csv</span> 単一で、コード（run_pick_place L139）もここを直書き。KIOXIA 専用・ローカル fallback なし。<b>real は単一ソース・v3</b>で確定。</p>
+      <p>以前「Mac working v3 と KIOXIA v2 が二重化」と疑っていた件は誤り。<span class="mono">~/r2r2r-scripts/</span> 配下に ledger は <b>0 件</b>（find 確認）。台帳の実体は KIOXIA の <span class="mono">/Volumes/KIOXIA/r2r2r-data/runs/pick_place_ledger_v3.csv</span> 単一で、コード（run_pick_place L147）もここを直書き。KIOXIA 専用・ローカル fallback なし。<b>real は単一ソース・v3</b>で確定。</p>
     </div>
 
     <h2 class="sec"><span class="n">④</span>残務 ── 確定後に残るもの</h2>
@@ -471,12 +457,15 @@
     <table>
       <thead><tr><th>論点</th><th>状態</th><th>内容</th></tr></thead>
       <tbody>
-        <tr><td>MASTER の台帳パス記述</td><td><span class="ok">済</span></td><td>DAY256 で MASTER を <span class="mono">v3</span> に更新済（保存先テーブル・フォルダ構成・保管ルール2箇所）。過去の更新履歴の v2 表記は当時の事実として保持</td></tr>
+        <tr><td>MASTER の台帳パス記述</td><td><span class="ok">済</span></td><td>MASTER を <span class="mono">v3</span> に更新済（保存先テーブル・フォルダ構成・保管ルール）</td></tr>
         <tr><td>place_noblock の扱い</td><td><span class="ok">明確化済</span></td><td>ファイルは adopted/ に存在するが j0_lookup が設計上拒否（ValueError）。place = withblock</td></tr>
-        <tr><td>実機のスクリプト構成</td><td><span class="ok">確定</span></td><td><span class="mono">.../place/place_modules/</span> の3本（調査済）</td></tr>
+        <tr><td>実機のスクリプト構成</td><td><span class="ok">確定</span></td><td><span class="mono">.../place/place_modules/</span>（run_pick_place / j0_lookup / fk_lookup / j0_sweep_scan）</td></tr>
+        <tr><td>補正記憶レイヤー</td><td><span class="ok">実装済</span></td><td>実機で稼働中。位置→Δ(x,z)・EMA0.5・20mm格子。lookup前に読み実測後に更新。KIOXIA・SSDガードあり</td></tr>
+        <tr><td>descend の Z 補正</td><td><span class="ok">解決</span></td><td>ベース回転だけ動かす方式（j0_lookup・1関節）では Z（奥行き）が動かなかった。descend を <span class="mono">fk_lookup</span>（6関節すべてを引く）にして解決。爪先の奥行きズレが 25mm 級→10mm 級へ</td></tr>
+        <tr><td>保持（grip / hold）</td><td><span class="lock">未解決</span></td><td>位置は合うが、j4 抜け・爪の握り緩みで掴んだブロックを落とすことがある。姿勢選択とは別レイヤー。次の山</td></tr>
+        <tr><td>補正記憶の実体ファイル</td><td><span class="ok">確定</span></td><td><span class="mono">/Volumes/KIOXIA/r2r2r-data/diag/correction_memory.json</span>（codex がコードで確認）。③に反映済</td></tr>
+        <tr><td>補正記憶の保存先カテゴリ</td><td>保留</td><td>実体は <span class="mono">diag/</span> 配下にある。MASTER の保存先テーブルでは diag/ は「単軸診断など測定スクリプト出力」。補正記憶は実行時の学習状態で種類が異なるため、種類→場所の整合は要検討（MASTER は場所追加時にテーブル更新が先）</td></tr>
         <tr><td>pose_id 付与位置の不揃い</td><td>保留</td><td>遡及分＝末尾／自動付与＝phase直後（今回未調査）。機能上は問題なし</td></tr>
-        <tr><td>補正記憶レイヤーの実装</td><td><span class="lock">未着手</span></td><td>DAY257 設計（②+ 図）。<span class="mono">fk_lookup</span> の上に位置→Δ(x,z) を貯めて狙いを補正する学習層。現行コードに該当処理なし。実装が入るまで blueprint 上は破線扱い</td></tr>
-        <tr><td>補正記憶の保存先・実体ファイル</td><td><span class="lock">未定</span></td><td>測定由来データのため KIOXIA 配下を想定。MASTER「データ保管」の種類→場所テーブルに追記してから実装する（場所のルール更新が実装より先）</td></tr>
       </tbody>
     </table>
     </div>
@@ -484,9 +473,9 @@
   </section>
 
   <footer>
-    設計図（規格自由・自分用・常用リファレンス）。イメージ図＝図解優先、全体解説＝絶対パスと根拠。モノクロ統一、赤系は pose_id・要更新・未実装フラグのみ。データ増加で変わる数値は載せない。<br>
+    設計図（規格自由・自分用・常用リファレンス）。イメージ図＝図解優先、全体解説＝絶対パスと根拠。モノクロ統一、赤系は pose_id・要更新・未解決のみ。データ増加で変わる数値は載せない。<br>
     パス確定: 実機 find ＋ run_pick_place / j0_lookup / j0_sweep_scan のソース grep（2026-06-26 調査）。<br>
-    補正記憶層（DAY257 新設計）は破線で併記＝<b>未実装・コード未確認</b>。実装と保存先が確定したら ① ②+ ③ ④ を正式版へ更新する。
+    補正記憶・descend の fk_lookup は実装記事を根拠に反映。補正記憶パス・行番号・関数名は codex レビューでコードと突合・確定（2026-06-27 更新）。
   </footer>
 </div>
 
